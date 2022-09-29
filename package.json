@@ -1,6 +1,6 @@
 {
   "private": true,
-  "author":"yuanli <2865437316@qq.com>",
+  "author": "yuanli <2865437316@qq.com>",
   "scripts": {
     "dev": "umi dev",
     "build": "umi build",
@@ -14,6 +14,8 @@
   "devDependencies": {
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
-    "typescript": "^4.1.2"
+    "typescript": "^4.1.2",
+    "@umijs/plugins": "^4.0.22",
+    "tailwindcss": "^3"
   }
 }
