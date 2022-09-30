@@ -1,11 +1,16 @@
 import yayJpg from '../assets/yay.jpg';
-import {TextField} from "@mui/material";
+import {Button, TextField} from "@mui/material";
 import Title from "@/components/title";
 
 export default function HomePage() {
+    const  handleChange = ()=>{
+
+    }
     return (
-        <div className='p-6'>
-            <Title/>
+        <div className='p-3'>
+            <Title handleChange={handleChange}/>
+            <Button  variant="contained">生成</Button>
         </div>
+
     );
 }
