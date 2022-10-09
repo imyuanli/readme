@@ -1,8 +1,14 @@
 import {TextField} from "@mui/material";
-import intl from 'react-intl-universal';
-import {useEffect, useState} from "react";
+import React from "react";
 
-export default function Title({}) {
+interface props {
+    prefix: any,
+    handleDataChange: any
+    handlePrefixChange: any
+    data: any
+}
+
+const Title: React.FunctionComponent<props> = ({prefix, data, handleDataChange, handlePrefixChange}) => {
     return (
         <div>
             <div className='text-2xl mb-3'>
@@ -10,10 +16,23 @@ export default function Title({}) {
             </div>
             <div className='flex'>
                 <div className='mr-6'>
-                    <TextField   value={intl.get('title')} id="standard-basic" label="" variant="standard"/>
+                    <TextField
+                        onChange={(e) => handlePrefixChange('title', e.target.value)}
+                        value={prefix?.title}
+                        id="standard-basic" label=""
+                        variant="standard"
+                    />
                 </div>
-                <TextField className='w-1/4' id="standard-basic" label="" variant="standard"/>
+                <TextField
+                    value={data?.title}
+                    onChange={(e) => handleDataChange('title', e.target.value)}
+                    className='w-1/2'
+                    id="standard-basic"
+                    label=""
+                    variant="standard"
+                />
             </div>
         </div>
-    );
+    )
 }
+export default Title

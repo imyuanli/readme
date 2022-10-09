@@ -13,6 +13,7 @@ const locales = {
     "en": en,
     "zh": zh,
 };
+let DEFAULT_PREFIX = {}
 export default function Layout() {
     const [initDone, setInitDone] = useState(false)
     useEffect(() => {
@@ -33,6 +34,7 @@ export default function Layout() {
             currentLocale: default_local,
             locales,
         }).then(() => {
+            DEFAULT_PREFIX = locales
             setInitDone(true)
         })
     }
@@ -44,6 +46,9 @@ export default function Layout() {
         setLocale(val)
         localStorage.setItem('locale', val)
         window.location.reload()
+    }
+    const context = {
+        DEFAULT_PREFIX
     }
     return (
         <div className='m-3'>
@@ -58,7 +63,7 @@ export default function Layout() {
                 <MenuItem value='en'>English</MenuItem>
             </Select>
             {
-                initDone && <Outlet/>
+                initDone && <Outlet context={context}/>
             }
         </div>
     );
