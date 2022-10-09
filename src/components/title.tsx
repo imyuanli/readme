@@ -10,7 +10,7 @@ interface props {
 
 const Title: React.FunctionComponent<props> = ({prefix, data, handleDataChange, handlePrefixChange}) => {
     return (
-        <div>
+        <div className='m-3'>
             <div className='text-2xl mb-3'>
                 Title
             </div>

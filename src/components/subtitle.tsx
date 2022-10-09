@@ -8,7 +8,7 @@ interface props {
 
 const SubTitle: React.FunctionComponent<props> = ({data, handleDataChange}) => {
     return (
-        <div>
+        <div className='m-3'>
             <div className='text-2xl mb-3'>
                 SubTitle
             </div>
