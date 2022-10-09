@@ -2,9 +2,9 @@ import intl from "react-intl-universal";
 
 export const DEFAULT_PREFIX = {
     title: intl.get('title'),
-    // currentWork: '🔭 I’m currently working on',
-    // currentLearn: '🌱 I’m currently learning',
-    // collaborateOn: '👯 I’m looking to collaborate on',
+    currentWork: '🔭 I’m currently working on',
+    currentLearn: '🌱 I’m currently learning',
+    collaborateOn: '👯 I’m looking to collaborate on',
     // helpWith: '🤝 I’m looking for help with',
     // ama: '💬 Ask me about',
     // contact: '📫 How to reach me',
@@ -18,9 +18,9 @@ export const DEFAULT_PREFIX = {
 export const DEFAULT_DATA = {
     title: '',
     subtitle: intl.get('subtitle'),
-    // currentWork: '',
-    // currentLearn: '',
-    // collaborateOn: '',
+    currentWork: '',
+    currentLearn: '',
+    collaborateOn: '',
     // helpWith: '',
     // ama: '',
     // contact: '',

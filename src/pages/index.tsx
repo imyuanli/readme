@@ -3,6 +3,7 @@ import Title from "@/components/title";
 import {useState} from "react";
 import {DEFAULT_DATA, DEFAULT_PREFIX} from "@/constants/default";
 import SubTitle from "@/components/subtitle";
+import Work from "@/components/work";
 
 export default function HomePage() {
     const [prefix, setPrefix] = useState(DEFAULT_PREFIX)
@@ -35,6 +36,10 @@ export default function HomePage() {
                 data={data}
                 handleDataChange={handleDataChange}
             />
+            <Work  prefix={prefix}
+                   data={data}
+                   handleDataChange={handleDataChange}
+                   handlePrefixChange={handlePrefixChange} />
             <Button onClick={handleFinish} variant="contained">生成</Button>
         </div>
     );
