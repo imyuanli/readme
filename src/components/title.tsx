@@ -1,35 +1,29 @@
-import {TextField} from "@mui/material";
 import React from "react";
+import PrefixInput from "@/components/base/prefix-input";
+import DataInput from "@/components/base/data-input";
+import BaseTitle from "@/components/base/base-title";
 
 interface props {
     prefix: any,
-    handleDataChange: any
     handlePrefixChange: any
     data: any
+    handleDataChange: any
 }
 
-const Title: React.FunctionComponent<props> = ({prefix, data, handleDataChange, handlePrefixChange}) => {
+const Title: React.FunctionComponent<props> = ({prefix, handlePrefixChange, data, handleDataChange}) => {
     return (
-        <div className='m-3'>
-            <div className='text-2xl mb-3'>
-                Title
-            </div>
+        <div className='mb-6'>
+            <BaseTitle value={'Title'} />
             <div className='flex'>
-                <div className='mr-6'>
-                    <TextField
-                        onChange={(e) => handlePrefixChange('title', e.target.value)}
-                        value={prefix?.title}
-                        id="standard-basic" label=""
-                        variant="standard"
-                    />
-                </div>
-                <TextField
+                <PrefixInput
+                    handlePrefixChange={handlePrefixChange}
+                    value={prefix?.title}
+                    type={'title'}
+                />
+                <DataInput
+                    handleDataChange={handleDataChange}
                     value={data?.title}
-                    onChange={(e) => handleDataChange('title', e.target.value)}
-                    className='w-1/2'
-                    id="standard-basic"
-                    label=""
-                    variant="standard"
+                    type={'title'}
                 />
             </div>
         </div>

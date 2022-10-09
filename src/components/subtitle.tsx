@@ -1,5 +1,7 @@
 import {TextField} from "@mui/material";
 import React from "react";
+import DataInput from "@/components/base/data-input";
+import BaseTitle from "@/components/base/base-title";
 
 interface props {
     data: any
@@ -8,18 +10,13 @@ interface props {
 
 const SubTitle: React.FunctionComponent<props> = ({data, handleDataChange}) => {
     return (
-        <div className='m-3'>
-            <div className='text-2xl mb-3'>
-                SubTitle
-            </div>
-            <div className='mr-6'>
-                <TextField
-                    onChange={(e) => handleDataChange('subtitle', e.target.value)}
-                    value={data?.subtitle}
-                    id="standard-basic" label=""
-                    variant="standard"
-                />
-            </div>
+        <div className='mb-6'>
+            <BaseTitle value={'SubTitle'} />
+            <DataInput
+                handleDataChange={handleDataChange}
+                value={data?.subtitle}
+                type={'subtitle'}
+            />
         </div>
     )
 }
