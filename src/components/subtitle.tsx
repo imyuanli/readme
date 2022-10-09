@@ -10,7 +10,7 @@ interface props {
 
 const SubTitle: React.FunctionComponent<props> = ({data, handleDataChange}) => {
     return (
-        <div className='mb-6'>
+        <div className='mb-8'>
             <BaseTitle value={'SubTitle'} />
             <DataInput
                 handleDataChange={handleDataChange}

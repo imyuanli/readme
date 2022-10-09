@@ -12,7 +12,7 @@ interface props {
 
 const Title: React.FunctionComponent<props> = ({prefix, handlePrefixChange, data, handleDataChange}) => {
     return (
-        <div className='mb-6'>
+        <div className='mb-8'>
             <BaseTitle value={'Title'} />
             <div className='flex'>
                 <PrefixInput

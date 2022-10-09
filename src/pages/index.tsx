@@ -25,7 +25,7 @@ export default function HomePage() {
         console.log(data)
     }
     return (
-        <div className='p-3'>
+        <div className='p-6'>
             <Title
                 prefix={prefix}
                 data={data}
