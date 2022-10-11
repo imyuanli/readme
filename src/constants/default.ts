@@ -60,14 +60,14 @@ export const DEFAULT_DATA = {
     // rssDynamicBlogs: false,
 };
 //
-// export const DEFAULT_LINK = {
-//     currentWork: '',
-//     collaborateOn: '',
-//     helpWith: '',
-//     portfolio: '',
-//     blog: '',
-//     resume: '',
-// };
+export const DEFAULT_LINK = {
+    currentWork: '',
+    collaborateOn: '',
+    helpWith: '',
+    portfolio: '',
+    blog: '',
+    resume: '',
+};
 //
 // export const DEFAULT_SOCIAL = {
 //     github: '',
