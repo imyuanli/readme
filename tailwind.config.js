@@ -4,5 +4,6 @@ module.exports = {
     './src/components/**.tsx',
     './src/layouts/**.tsx',
     './src/components/**.tsx',
+    './src/components/base/**.tsx',
   ],
 }
