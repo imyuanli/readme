@@ -9,7 +9,7 @@ interface props {
 
 const PrefixInput: React.FunctionComponent<props> = ({value, type, handlePrefixChange}) => {
     return (
-        <div className='mr-6 w-1/4'>
+        <div className='mr-6 w-1/5'>
             <TextField
                 onChange={(e) => handlePrefixChange(type, e.target.value)}
                 value={value}

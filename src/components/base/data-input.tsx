@@ -12,10 +12,11 @@ const DataInput: React.FunctionComponent<props> = ({value, type, handleDataChang
         <TextField
             value={value}
             onChange={(e) => handleDataChange(type, e.target.value)}
-            className='w-1/2'
+            className='w-1/3'
             id="standard-basic"
             label=""
             variant="standard"
+            placeholder='Name'
         />
     )
 }
