@@ -77,14 +77,14 @@ const Work: React.FunctionComponent<props> = ({
                             <PrefixInput
                                 handlePrefixChange={handlePrefixChange}
                                 value={prefix[item?.name]}
-                                type={item}
+                                type={item?.name}
                             />
                             {
                                 item?.placeholderData &&
                                 <DataInput
                                     handleDataChange={handleDataChange}
                                     value={data[item?.name]}
-                                    type={item}
+                                    type={item?.name}
                                     placeholder={item?.placeholderData}
                                 />
                             }
@@ -93,7 +93,7 @@ const Work: React.FunctionComponent<props> = ({
                                 <LinkInput
                                     handleLinkChange={handleLinkChange}
                                     value={link[item?.name]}
-                                    type={item}
+                                    type={item?.name}
                                     placeholder={item?.placeholderLink}
                                 />
                             }
