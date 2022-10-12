@@ -1,7 +1,10 @@
 {
   "private": true,
   "author": "yuanli <2865437316@qq.com>",
+  "homepage": "https://imyuanli.github.io/produce-readme/",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "dev": "umi dev",
     "build": "umi build",
     "postinstall": "umi setup",
@@ -12,6 +15,7 @@
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@mui/material": "^5.10.7",
+    "gh-pages": "^4.0.0",
     "react-intl-universal": "^2.6.6",
     "umi": "^4.0.22",
     "umi-plugin-locale": "^2.11.7",
