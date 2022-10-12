@@ -1,7 +1,7 @@
 {
-  "private": false,
+  "private": true,
   "author": "yuanli <2865437316@qq.com>",
-  "homepage": "https://imyuanli.github.io/produce-readme/",
+  "homepage": "https://imyuanli.github.io/",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
