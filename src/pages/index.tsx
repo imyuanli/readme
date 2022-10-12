@@ -1,10 +1,12 @@
 import {Button} from "@mui/material";
 import Title from "@/components/title";
 import {useState} from "react";
-import {DEFAULT_DATA, DEFAULT_PREFIX,DEFAULT_LINK} from "@/constants/default";
+import {DEFAULT_DATA, DEFAULT_PREFIX, DEFAULT_LINK} from "@/constants/default";
 import SubTitle from "@/components/subtitle";
 import Work from "@/components/work";
 import {generateMarkdown} from "@/utils/util";
+import intl from "react-intl-universal";
+import {Md} from "@/components/md";
 
 export default function HomePage() {
     const [prefix, setPrefix] = useState(DEFAULT_PREFIX)
@@ -35,19 +37,27 @@ export default function HomePage() {
     const handleGenerate = () => {
         setShowMd(true)
         // @ts-ignore
-        setMdContent(generateMarkdown(prefix,data,link))
+        setMdContent(generateMarkdown(prefix, data, link))
     }
     return (
         <div className='p-6'>
             {
                 showMd ?
                     <>
-                        <div className='whitespace-pre'>
-                            {mdContent}
+                        <div className='whitespace-pre w-full flex justify-center items-center border-2 bg-blue-50 p-6'>
+                            <Md prefix={prefix} data={data} link={link}/>
+                            {
+
+                            }
                         </div>
-                        <Button onClick={() => {
-                            setShowMd(false)
-                        }} variant="contained">取消</Button>
+
+                        <div className='w-full flex justify-center items-center mt-3'>
+                            <Button size={'large'} onClick={() => {
+                                setShowMd(false)
+                            }} variant="contained">
+                                {intl.get('btnBack')}
+                            </Button>
+                        </div>
                     </>
                     :
                     <>
@@ -68,7 +78,11 @@ export default function HomePage() {
                               handlePrefixChange={handlePrefixChange}
                               handleLinkChange={handleLinkChange}
                         />
-                        <Button onClick={handleGenerate} variant="contained">生成</Button>
+                        <div className='w-full flex justify-center items-center'>
+                            <Button onClick={handleGenerate} size='large' variant="contained">
+                                {intl.get('btnGen')}
+                            </Button>
+                        </div>
                     </>
             }
         </div>

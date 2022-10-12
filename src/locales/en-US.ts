@@ -11,4 +11,7 @@ export default  {
     // funFact: '⚡ Fun fact',
     // portfolio: '👨‍💻 All of my projects are available at',
     // blog: '📝 I regularly write articles on',
+
+    btnGen:"Generate README",
+    btnBack:'back to edit'
 };
