@@ -6,7 +6,6 @@ import SubTitle from "@/components/subtitle";
 import Work from "@/components/work";
 import {generateMarkdown} from "@/utils/util";
 import intl from "react-intl-universal";
-import {Md} from "@/components/md";
 
 export default function HomePage() {
     const [prefix, setPrefix] = useState(DEFAULT_PREFIX)
@@ -44,13 +43,9 @@ export default function HomePage() {
             {
                 showMd ?
                     <>
-                        <div className='whitespace-pre w-full flex justify-center items-center border-2 bg-blue-50 p-6'>
-                            <Md prefix={prefix} data={data} link={link}/>
-                            {
-
-                            }
+                        <div className='whitespace-pre-wrap w-full flex justify-center items-center border-2 bg-blue-50 p-6'>
+                            {mdContent}
                         </div>
-
                         <div className='w-full flex justify-center items-center mt-3'>
                             <Button size={'large'} onClick={() => {
                                 setShowMd(false)
