@@ -5,7 +5,7 @@ interface props {
     value: any,
     type: any,
     handleDataChange: any
-    placeholder:string
+    placeholder?:string
 }
 
 const DataInput: React.FunctionComponent<props> = ({value, type, handleDataChange,placeholder}) => {
