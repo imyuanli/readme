@@ -5,11 +5,12 @@ interface props {
     value: any,
     type: any,
     handleLinkChange: any
+    placeholder:string
 }
 
-const LinkInput: React.FunctionComponent<props> = ({value, type, handleLinkChange}) => {
+const LinkInput: React.FunctionComponent<props> = ({value, type, handleLinkChange,placeholder}) => {
     return (
-        <div className='ml-6 w-1/3'>
+        <div className='w-1/3'>
             <TextField
                 value={value}
                 onChange={(e) => handleLinkChange(type, e.target.value)}
@@ -17,7 +18,7 @@ const LinkInput: React.FunctionComponent<props> = ({value, type, handleLinkChang
                 id="standard-basic"
                 label=""
                 variant="standard"
-                placeholder='Link'
+                placeholder={placeholder}
             />
         </div>
     )
