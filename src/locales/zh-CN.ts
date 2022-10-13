@@ -1,7 +1,7 @@
 export default {
     title: "你好👋，我是",
     subtitle: '一位来自中国的前端工程师',
-    currentWork: '🤑 我目前的工作在',
+    currentWork: '🤑 我目前正在做的事情是',
     collaborateOn: '👯 我希望在以下方面进行合作',
     helpWith: '🤝 我正在寻求帮助',
     currentLearn: '📚 我目前在学习',
@@ -9,8 +9,8 @@ export default {
     contact: '📫 如何联系我',
     resume: '📄 了解我的经历',
     funFact: '⚡ 性格方面',
-    portfolio: '👨‍💻 我的所有项目都可以在',
-    blog: '📝 我经常写一些关于',
+    portfolio: '👨‍💻 我所有项目都在',
+    blog: '📝 我定期写的文章在',
 
     //btn
     btnGen:"生成 README",
