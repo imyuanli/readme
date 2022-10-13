@@ -10,16 +10,16 @@ interface props {
     handleCheckChange: any
 }
 
-const Others: React.FunctionComponent<props> = ({data, handleDataChange, handleCheckChange}) => {
+const AddOns: React.FunctionComponent<props> = ({data, handleDataChange, handleCheckChange}) => {
     const checkArr = ['visitorsBadge', 'githubProfileTrophy', 'githubStats', 'topLanguages', 'streakStats',]
     return (
         <div className='mb-8'>
-            <BaseTitle value={'Others'}/>
+            <BaseTitle value={intl.get('bsAddOns')} />
             <DataInput
                 handleDataChange={handleDataChange}
                 value={data?.githubName}
                 type={'githubName'}
-                placeholder='输入你的github用户名'
+                placeholder={intl.get('githubName')}
             />
             <FormGroup className='w-full'>
                 {
@@ -40,4 +40,4 @@ const Others: React.FunctionComponent<props> = ({data, handleDataChange, handleC
         </div>
     )
 }
-export default Others
+export default AddOns

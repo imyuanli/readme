@@ -14,7 +14,7 @@ interface props {
     link: any
 }
 
-const Work: React.FunctionComponent<props> = ({
+const Detail: React.FunctionComponent<props> = ({
                                                   prefix,
                                                   data,
                                                   link,
@@ -69,7 +69,7 @@ const Work: React.FunctionComponent<props> = ({
     ]
     return (
         <div className='mb-8'>
-            <BaseTitle value={'Work'}/>
+            <BaseTitle value={intl.get('bsDetail')} />
             {
                 result.map((item, index) => {
                     return (
@@ -104,4 +104,4 @@ const Work: React.FunctionComponent<props> = ({
         </div>
     )
 }
-export default Work
+export default Detail

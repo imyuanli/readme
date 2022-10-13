@@ -3,10 +3,10 @@ import Title from "@/components/title";
 import {useState} from "react";
 import {DEFAULT_DATA, DEFAULT_PREFIX, DEFAULT_LINK} from "@/constants/default";
 import SubTitle from "@/components/subtitle";
-import Work from "@/components/work";
+import Detail from "@/components/detail";
 import {generateMarkdown} from "@/utils/util";
 import intl from "react-intl-universal";
-import Others from "@/components/others";
+import AddOns from "@/components/add-ons";
 
 export default function HomePage() {
     const [prefix, setPrefix] = useState(DEFAULT_PREFIX)
@@ -86,14 +86,14 @@ export default function HomePage() {
                             data={data}
                             handleDataChange={handleDataChange}
                         />
-                        <Work prefix={prefix}
-                              data={data}
-                              link={link}
-                              handleDataChange={handleDataChange}
-                              handlePrefixChange={handlePrefixChange}
-                              handleLinkChange={handleLinkChange}
+                        <Detail prefix={prefix}
+                                data={data}
+                                link={link}
+                                handleDataChange={handleDataChange}
+                                handlePrefixChange={handlePrefixChange}
+                                handleLinkChange={handleLinkChange}
                         />
-                        <Others
+                        <AddOns
                             data={data}
                             handleDataChange={handleDataChange}
                             handleCheckChange={handleCheckChange}

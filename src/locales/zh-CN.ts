@@ -33,9 +33,16 @@ export default {
     // topLanguages: '显示github语言统计卡片',
     // streakStats: '显示github streak stats',
 
+    githubName: '输入你的github用户名',
     visitorsBadge: 'display visitors count badge',
     githubProfileTrophy: 'display github trophy',
     githubStats: 'display github profile stats card',
     topLanguages: 'display top skills',
     streakStats: 'display github streak stats',
+
+
+    bsTitle:'标题',
+    bsSubtitle:'副标题',
+    bsDetail:'详细介绍',
+    bsAddOns:'附加的功能',
 };

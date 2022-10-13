@@ -25,10 +25,17 @@ export default {
     phFunFact: 'I think I am....',
 
 
-
+    githubName: 'please add github username',
     visitorsBadge: 'display visitors count badge',
     githubProfileTrophy: 'display github trophy',
     githubStats: 'display github profile stats card',
     topLanguages: 'display top skills',
     streakStats: 'display github streak stats',
+
+
+
+    bsTitle:'Title',
+    bsSubtitle:'Subtitle',
+    bsDetail:'Detail',
+    bsAddOns:'Add-Ons',
 };
