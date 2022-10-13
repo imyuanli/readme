@@ -1,4 +1,4 @@
-import {Button, Card, Checkbox, FormControlLabel, FormGroup} from "@mui/material";
+import {Alert, AlertTitle, Button, Card, Checkbox, FormControlLabel, FormGroup, Snackbar} from "@mui/material";
 import Title from "@/components/title";
 import {useState} from "react";
 import {DEFAULT_DATA, DEFAULT_PREFIX, DEFAULT_LINK} from "@/constants/default";
@@ -27,6 +27,22 @@ export default function HomePage() {
         setData(res)
     }
 
+    const [open,setOpen] = useState(false)
+    const handleCheckChange = (key: any, value: any) => {
+        if(!data?.githubName){
+            setOpen(true)
+        }
+        const res = {...data}
+        // @ts-ignore
+        res[key] = value
+        setData(res)
+    }
+    const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpen(false);
+    };
     const handleLinkChange = (key: any, value: any) => {
         const res = {...link}
         // @ts-ignore
@@ -80,7 +96,13 @@ export default function HomePage() {
                         <Others
                             data={data}
                             handleDataChange={handleDataChange}
+                            handleCheckChange={handleCheckChange}
                         />
+                        <Snackbar anchorOrigin={{horizontal:'center',vertical: 'top'}}  open={open} autoHideDuration={2000} onClose={handleClose}>
+                            <Alert onClose={handleClose} severity="warning" sx={{ width: '100%' }}>
+                                Please add github username to use these others add-ons
+                            </Alert>
+                        </Snackbar>
                         <div className='w-full flex justify-center items-center'>
                             <Button onClick={handleGenerate} size='large' variant="contained">
                                 {intl.get('btnGen')}
