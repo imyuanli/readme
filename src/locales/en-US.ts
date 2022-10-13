@@ -23,4 +23,12 @@ export default {
     phBlog: 'blog link',
     phResume: 'resume link',
     phFunFact: 'I think I am....',
+
+
+
+    visitorsBadge: 'display visitors count badge',
+    githubProfileTrophy: 'display github trophy',
+    githubStats: 'display github profile stats card',
+    topLanguages: 'display top skills',
+    streakStats: 'display github streak stats',
 };

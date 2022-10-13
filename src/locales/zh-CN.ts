@@ -25,4 +25,17 @@ export default {
     phBlog:'博客链接',
     phResume: '关于我的链接',
     phFunFact: '我认为我是....',
+
+
+    // visitorsBadge: '显示计数徽章',
+    // githubProfileTrophy: '显示GitHub统计奖杯',
+    // githubStats: '',
+    // topLanguages: '显示github语言统计卡片',
+    // streakStats: '显示github streak stats',
+
+    visitorsBadge: 'display visitors count badge',
+    githubProfileTrophy: 'display github trophy',
+    githubStats: 'display github profile stats card',
+    topLanguages: 'display top skills',
+    streakStats: 'display github streak stats',
 };

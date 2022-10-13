@@ -25,13 +25,11 @@ export const DEFAULT_DATA = {
     ama: '',
     contact: '',
     funFact: '',
-    // twitterBadge: false,
-    // visitorsBadge: false,
-    // badgeStyle: 'flat',
-    // badgeColor: '0e75b6',
-    // badgeLabel: 'Profile views',
-    // githubProfileTrophy: false,
-    // githubStats: false,
+    githubName:'',
+    //单选框
+    visitorsBadge: false,
+    githubProfileTrophy: false,
+    githubStats: false,
     // githubStatsOptions: {
     //     theme: '',
     //     titleColor: '',
@@ -41,7 +39,7 @@ export const DEFAULT_DATA = {
     //     cacheSeconds: null,
     //     locale: 'en',
     // },
-    // topLanguages: false,
+    topLanguages: false,
     // topLanguagesOptions: {
     //     theme: '',
     //     titleColor: '',
@@ -51,7 +49,7 @@ export const DEFAULT_DATA = {
     //     cacheSeconds: null,
     //     locale: 'en',
     // },
-    // streakStats: false,
+    streakStats: false,
     // streakStatsOptions: {
     //     theme: '',
     // },
@@ -68,7 +66,8 @@ export const DEFAULT_LINK = {
     blog: '',
     resume: '',
 };
-//
+
+
 // export const DEFAULT_SOCIAL = {
 //     github: '',
 //     dev: '',
@@ -93,8 +92,4 @@ export const DEFAULT_LINK = {
 //     geeks_for_geeks: '',
 //     discord: '',
 //     rssurl: '',
-// };
-//
-// export const DEFAULT_SUPPORT = {
-//     buyMeACoffee: '',
 // };
