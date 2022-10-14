@@ -2,7 +2,7 @@
 
 **[点击这里体验](https://imyuanli.github.io/produce-readme/)**
 
-<h2>下面就是项目生成的示例</h1>
+<h2>下面就是项目生成的示例</h2>
 
 <h1 align="center">Hi 👋, I'mimyuanli</h1>
 <h3 align="center">A frontend developer from China</h3>
