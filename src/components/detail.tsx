@@ -4,6 +4,7 @@ import PrefixInput from "@/components/base/prefix-input";
 import DataInput from "@/components/base/data-input";
 import LinkInput from "@/components/base/link-input";
 import intl from "react-intl-universal";
+import {DEFAULT_LIST} from "@/constants/default";
 
 interface props {
     prefix: any,
@@ -22,56 +23,11 @@ const Detail: React.FunctionComponent<props> = ({
                                                   handlePrefixChange,
                                                   handleLinkChange
                                               }) => {
-    const result = [
-        {
-            name: 'currentWork',
-            placeholderData: intl.get('projectName'),
-            placeholderLink: intl.get('projectLink'),
-        },
-        {
-            name: 'collaborateOn',
-            placeholderData: intl.get('projectName'),
-            placeholderLink: intl.get('projectLink'),
-        },
-        {
-            name: 'helpWith',
-            placeholderData: intl.get('projectName'),
-            placeholderLink: intl.get('projectLink'),
-        },
-        {
-            name: 'currentLearn',
-            placeholderData: intl.get('phLearn'),
-        },
-        {
-            name: 'ama',
-            placeholderData: intl.get('phAma'),
-        },
-        {
-            name: 'contact',
-            placeholderData: 'example@gmail.com',
-        },
-        {
-            name: 'portfolio',
-            placeholderLink: intl.get('phPortfolio'),
-        },
-        {
-            name: 'blog',
-            placeholderLink: intl.get('phBlog'),
-        },
-        {
-            name: 'resume',
-            placeholderLink: intl.get('phResume'),
-        },
-        {
-            name: 'funFact',
-            placeholderData: intl.get('phFunFact'),
-        },
-    ]
     return (
         <div className='mb-8'>
             <BaseTitle value={intl.get('bsDetail')} />
             {
-                result.map((item, index) => {
+                DEFAULT_LIST.map((item, index) => {
                     return (
                         <div className='flex mb-3' key={index}>
                             <PrefixInput
