@@ -28,7 +28,7 @@ const MarkDown: React.FunctionComponent<props> = ({setMdContent, prefix, data, l
             </>}
             {data?.visitorsBadge && <>
                 <img
-                    src={`https://komarev.com/ghpvc/?username=${data.githubName}&label=Profile%20views&color=0e75b6&style=flat`}
+                    src={`https://komarev.com/ghpvc/?username=${data.githubName}`}
                     alt={data.githubName}/>
                 <br/>
             </>}
@@ -39,14 +39,21 @@ const MarkDown: React.FunctionComponent<props> = ({setMdContent, prefix, data, l
             </>}
             {<PDL prefix={prefix} data={data} link={link}/>}
             {data?.topLanguages && <><img
-                src={`https://github-readme-stats.vercel.app/api/top-langs?username=${data.githubName}&show_icons=true&locale=en&layout=compact`}
+                src={`https://github-readme-stats.vercel.app/api/top-langs?username=${data.githubName}`}
                 alt={data.githubName}/><br/></>}
             {data?.githubStats && <><img
-                src={`https://github-readme-stats.vercel.app/api?username=${data.githubName}&show_icons=true&locale=en`}
+                src={`https://github-readme-stats.vercel.app/api?username=${data.githubName}`}
                 alt={data.githubName}/><br/></>}
             {data?.streakStats && <><img
                 src={`https://github-readme-streak-stats.herokuapp.com/?user=${data.githubName}`}
                 alt={data.githubName}/><br/></>}
+            {data?.activityGraph && <><img
+                src={`https://activity-graph.herokuapp.com/graph?username=${data.githubName}`}
+                alt={data.githubName}/><br/></>}
+            {<img src="https://readme-typing-svg.herokuapp.com/?lines=第一句话;第二句话" />}
+                        {/*<div align="center">*/}
+            {/*    <img src="https://metrics.lecoq.io/sun0225SUN?template=classic&config.timezone=Asia%2FShanghai">*/}
+            {/*</div>*/}
         </div>
     )
 }
