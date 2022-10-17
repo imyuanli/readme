@@ -54,7 +54,7 @@ export default function HomePage() {
     const handleGenerate = () => {
         setShowMd(true)
         // @ts-ignore
-        setMdContent(generateMarkdown(prefix, data, link))
+        // setMdContent(generateMarkdown(prefix, data, link))
     }
 
     return (
@@ -64,6 +64,11 @@ export default function HomePage() {
                     <>
                         <div className='whitespace-pre-wrap w-full flex justify-center items-center border-2 bg-blue-50 p-6'>
                             <MarkDown setMdContent={setMdContent} prefix={prefix} data={data} link={link}/>
+                        </div>
+                        <div className='whitespace-pre-wrap'>
+                            {
+                                mdContent
+                            }
                         </div>
                         <div className='w-full flex justify-center items-center mt-3'>
                             <Button size={'large'} onClick={() => {
