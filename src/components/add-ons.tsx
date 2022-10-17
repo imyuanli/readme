@@ -15,12 +15,14 @@ const AddOns: React.FunctionComponent<props> = ({data, handleDataChange, handleC
     return (
         <div className='mb-8'>
             <BaseTitle value={intl.get('bsAddOns')} />
-            <DataInput
-                handleDataChange={handleDataChange}
-                value={data?.githubName}
-                type={'githubName'}
-                placeholder={intl.get('githubName')}
-            />
+            <div className={'mb-3'}>
+                <DataInput
+                    handleDataChange={handleDataChange}
+                    value={data?.githubName}
+                    type={'githubName'}
+                    placeholder={intl.get('githubName')}
+                />
+            </div>
             <FormGroup className='w-full'>
                 {
                     checkArr.map((item, index) => {
