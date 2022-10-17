@@ -6,4 +6,11 @@ module.exports = {
     './src/components/**.tsx',
     './src/components/base/**.tsx',
   ],
+  theme:{
+    extend:{
+      width: {
+        '5/11': '47.7%',
+      }
+    }
+  }
 }

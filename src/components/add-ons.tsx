@@ -1,8 +1,7 @@
-import {Checkbox, FormControlLabel, FormGroup, TextField} from "@mui/material";
 import React from "react";
-import DataInput from "@/components/base/data-input";
 import BaseTitle from "@/components/base/base-title";
 import intl from "react-intl-universal";
+import GitHubAddOns from "@/components/add-ons/github-add-ons";
 
 interface props {
     data: any
@@ -11,34 +10,32 @@ interface props {
 }
 
 const AddOns: React.FunctionComponent<props> = ({data, handleDataChange, handleCheckChange}) => {
-    const checkArr = ['visitorsBadge', 'githubProfileTrophy', 'githubStats', 'topLanguages', 'streakStats',]
     return (
         <div className='mb-8'>
-            <BaseTitle value={intl.get('bsAddOns')} />
-            <div className={'mb-3'}>
-                <DataInput
-                    handleDataChange={handleDataChange}
-                    value={data?.githubName}
-                    type={'githubName'}
-                    placeholder={intl.get('githubName')}
-                />
+            <BaseTitle value={intl.get('bsAddOns')}/>
+            <div className='flex flex-wrap w-full'>
+                <div className='w-5/11 m-3'>
+                    <GitHubAddOns
+                        data={data}
+                        handleDataChange={handleDataChange}
+                        handleCheckChange={handleCheckChange}
+                    />
+                </div>
+                <div className='w-5/11 m-3'>
+                    <GitHubAddOns
+                        data={data}
+                        handleDataChange={handleDataChange}
+                        handleCheckChange={handleCheckChange}
+                    />
+                </div>
+                <div className='w-5/11 m-3'>
+                    <GitHubAddOns
+                        data={data}
+                        handleDataChange={handleDataChange}
+                        handleCheckChange={handleCheckChange}
+                    />
+                </div>
             </div>
-            <FormGroup className='w-full'>
-                {
-                    checkArr.map((item, index) => {
-                        return (
-                            <FormControlLabel key={index} control={
-                                <Checkbox
-                                    onChange={(e) => {
-                                        handleCheckChange(e.target.value, e.target.checked)
-                                    }}
-                                    value={item}
-                                />} label={intl.get(item)}
-                            />
-                        )
-                    })
-                }
-            </FormGroup>
         </div>
     )
 }
