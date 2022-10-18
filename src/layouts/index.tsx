@@ -51,7 +51,7 @@ export default function Layout() {
         DEFAULT_PREFIX
     }
     return (
-        <div className='m-3'>
+        <div className='bg-yellow-50'>
             <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"

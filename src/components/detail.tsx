@@ -26,37 +26,39 @@ const Detail: React.FunctionComponent<props> = ({
     return (
         <div className='mb-8'>
             <BaseTitle value={intl.get('bsDetail')} />
-            {
-                DEFAULT_LIST.map((item, index) => {
-                    return (
-                        <div className='flex mb-3' key={index}>
-                            <PrefixInput
-                                handlePrefixChange={handlePrefixChange}
-                                value={prefix[item?.name]}
-                                type={item?.name}
-                            />
-                            {
-                                item?.placeholderData &&
-                                <DataInput
-                                    handleDataChange={handleDataChange}
-                                    value={data[item?.name]}
+            <div className='m-2'>
+                {
+                    DEFAULT_LIST.map((item, index) => {
+                        return (
+                            <div className='flex mb-3' key={index}>
+                                <PrefixInput
+                                    handlePrefixChange={handlePrefixChange}
+                                    value={prefix[item?.name]}
                                     type={item?.name}
-                                    placeholder={item?.placeholderData}
                                 />
-                            }
-                            {
-                                item?.placeholderLink &&
-                                <LinkInput
-                                    handleLinkChange={handleLinkChange}
-                                    value={link[item?.name]}
-                                    type={item?.name}
-                                    placeholder={item?.placeholderLink}
-                                />
-                            }
-                        </div>
-                    )
-                })
-            }
+                                {
+                                    item?.placeholderData &&
+                                    <DataInput
+                                        handleDataChange={handleDataChange}
+                                        value={data[item?.name]}
+                                        type={item?.name}
+                                        placeholder={item?.placeholderData}
+                                    />
+                                }
+                                {
+                                    item?.placeholderLink &&
+                                    <LinkInput
+                                        handleLinkChange={handleLinkChange}
+                                        value={link[item?.name]}
+                                        type={item?.name}
+                                        placeholder={item?.placeholderLink}
+                                    />
+                                }
+                            </div>
+                        )
+                    })
+                }
+            </div>
         </div>
     )
 }

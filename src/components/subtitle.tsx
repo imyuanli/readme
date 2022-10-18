@@ -12,12 +12,14 @@ interface props {
 const SubTitle: React.FunctionComponent<props> = ({data, handleDataChange}) => {
     return (
         <div className='mb-8'>
-            <BaseTitle value={intl.get('bsSubTitle')} />
-            <DataInput
-                handleDataChange={handleDataChange}
-                value={data?.subtitle}
-                type={'subtitle'}
-            />
+            <BaseTitle value={intl.get('bsSubtitle')} />
+            <div className='m-2'>
+                <DataInput
+                    handleDataChange={handleDataChange}
+                    value={data?.subtitle}
+                    type={'subtitle'}
+                />
+            </div>
         </div>
     )
 }

@@ -15,7 +15,7 @@ const Title: React.FunctionComponent<props> = ({prefix, handlePrefixChange, data
     return (
         <div className='mb-8'>
             <BaseTitle value={intl.get('bsTitle')} />
-            <div className='flex'>
+            <div className='flex m-2'>
                 <PrefixInput
                     handlePrefixChange={handlePrefixChange}
                     value={prefix?.title}

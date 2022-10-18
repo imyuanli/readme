@@ -13,7 +13,7 @@ interface props {
 const GitHubAddOns: React.FunctionComponent<props> = ({data, handleDataChange, handleCheckChange}) => {
     const githubCheckArr = ['visitorsBadge', 'githubProfileTrophy', 'githubStats', 'topLanguages', 'streakStats']
     return (
-        <Card  className='mb-8 mt-3 p-6'>
+        <Card  className='mb-6 p-6'>
             <div className='text-base mb-3 '>About GitHub</div>
             <div className={'mb-3'}>
                 <DataInput
