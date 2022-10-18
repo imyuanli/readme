@@ -34,15 +34,15 @@ export default {
     // streakStats: '显示github streak stats',
 
     githubName: '输入你的github用户名',
-    visitorsBadge: 'display visitors count badge',
-    githubProfileTrophy: 'display github trophy',
-    githubStats: 'display github profile stats card',
-    topLanguages: 'display top skills',
-    streakStats: 'display github streak stats',
+    visitorsBadge: '显示访客徽章',
+    githubProfileTrophy: '显示GitHub资料奖杯',
+    githubStats: '显示GitHub信息卡片',
+    topLanguages: '显示语言统计卡片吗',
+    streakStats: '显示GitHub连续打卡计数卡片',
 
 
     bsTitle:'标题',
     bsSubtitle:'副标题',
     bsDetail:'详细介绍',
-    bsAddOns:'附加的功能',
+    bsAddOns:'附加功能',
 };
