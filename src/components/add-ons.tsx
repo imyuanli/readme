@@ -15,15 +15,20 @@ const AddOns: React.FunctionComponent<props> = ({data, handleDataChange, handleC
     return (
         <div className='mb-8'>
             <BaseTitle value={intl.get('bsAddOns')}/>
-            <GitHubAddOns
-                data={data}
-                handleDataChange={handleDataChange}
-                handleCheckChange={handleCheckChange}
-            />
-            <OtherAddOns
-                data={data}
-                handleDataChange={handleDataChange}
-                handleCheckChange={handleCheckChange}/>
+            <div className='flex flex-wrap w-full'>
+
+                <div className='w-full m-2'>
+                    <GitHubAddOns
+                        data={data}
+                        handleDataChange={handleDataChange}
+                        handleCheckChange={handleCheckChange}
+                    />
+                </div>
+            </div>
+            {/*<OtherAddOns*/}
+            {/*    data={data}*/}
+            {/*    handleDataChange={handleDataChange}*/}
+            {/*    handleCheckChange={handleCheckChange}/>*/}
             {/*<TypeWriter />*/}
         </div>
     )

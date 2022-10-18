@@ -14,17 +14,20 @@ interface props {
 const GitHubAddOns: React.FunctionComponent<props> = ({data, handleDataChange, handleCheckChange}) => {
     const githubCheckArr = ['visitorsBadge', 'githubProfileTrophy', 'githubStats', 'topLanguages', 'streakStats']
     return (
-        <Card  className='mb-8 p-6 '>
+        <Card  className='mb-8 p-6'>
             <OnTitle value={'GitHub'} />
-            <div className={'mb-3'}>
-                <DataInput
-                    handleDataChange={handleDataChange}
+            <div style={{width:'50%'}} className='mb-3'>
+                <TextField
                     value={data?.githubName}
-                    type={'githubName'}
+                    onChange={(e) => handleDataChange('githubName', e.target.value)}
+                    className='w-full'
+                    id="standard-basic"
+                    label=""
+                    variant="standard"
                     placeholder={intl.get('githubName')}
                 />
             </div>
-            <FormGroup className='w-full'>
+            <FormGroup style={{flexDirection:'row',justifyContent: 'space-between'}}>
                 {
                     githubCheckArr.map((item, index) => {
                         return (
