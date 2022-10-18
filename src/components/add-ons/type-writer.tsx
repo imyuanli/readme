@@ -1,8 +1,10 @@
-import {Button, TextField} from "@mui/material";
+import {Button, Card, Checkbox, FormControlLabel, FormGroup, Icon, IconButton, TextField} from "@mui/material";
 import React, {useEffect, useState} from "react";
 import DataInput from "@/components/base/data-input";
 import BaseTitle from "@/components/base/base-title";
 import intl from "react-intl-universal";
+import OnTitle from "@/components/add-ons/on-title";
+import AddIcon from '@mui/icons-material/Add';
 
 interface props {
 
@@ -19,25 +21,34 @@ const TypeWriter: React.FunctionComponent<props> = () => {
         data[index].value = e
     }
     return (
-        <div className='mb-8'>
+        <Card className='mb-6 p-6'>
+            <OnTitle value={'About other'}/>
             <div className={'flex flex-col'}>
                 {
                     data.map((item: object, index: number) => {
                         return (
-                            <TextField
-                                key={index}
-                                id="standard-basic"
-                                label=""
-                                variant="standard"
-                                onChange={(e) => onChange(index, e.target.value)}
-                            />
+                            <>
+                                <TextField
+                                    key={index}
+                                    id="standard-basic"
+                                    label=""
+                                    variant="standard"
+                                    className='mb-3'
+                                    onChange={(e) => onChange(index, e.target.value)}
+                                />
+                            </>
+
                         )
                     })
                 }
             </div>
-            <Button onClick={handler} size='large' variant="contained">+</Button>
-            <Button onClick={()=>{console.log(data)}} size='large' variant="contained">?ads</Button>
-        </div>
+            <div className='flex justify-center items-center'>
+                <IconButton onClick={handler}>
+                    <AddIcon/>
+                </IconButton>
+            </div>
+            {/*<Button onClick={()=>{console.log(data)}} size='large' variant="contained">?ads</Button>*/}
+        </Card>
     )
 }
 export default TypeWriter

@@ -15,7 +15,7 @@ const GitHubAddOns: React.FunctionComponent<props> = ({data, handleDataChange, h
     const githubCheckArr = ['visitorsBadge', 'githubProfileTrophy', 'githubStats', 'topLanguages', 'streakStats']
     return (
         <Card  className='mb-8 p-6 '>
-            <OnTitle value={'About GitHub'} />
+            <OnTitle value={'Other'} />
             <div className={'mb-3'}>
                 <DataInput
                     handleDataChange={handleDataChange}

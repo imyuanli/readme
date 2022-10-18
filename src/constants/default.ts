@@ -56,7 +56,9 @@ export const DEFAULT_DATA = {
     // devDynamicBlogs: false,
     // mediumDynamicBlogs: false,
     // rssDynamicBlogs: false,
-    typeWriter:false
+    typeWriter:[
+        {value: ''}
+    ]
 };
 //
 export const DEFAULT_LINK = {
