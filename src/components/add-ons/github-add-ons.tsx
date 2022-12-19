@@ -14,36 +14,38 @@ interface props {
 const GitHubAddOns: React.FunctionComponent<props> = ({data, handleDataChange, handleCheckChange}) => {
     const githubCheckArr = ['visitorsBadge', 'githubProfileTrophy', 'githubStats', 'topLanguages', 'streakStats']
     return (
-        <Card  className='mb-8 p-6'>
-            <OnTitle value={'GitHub'} />
-            <div style={{width:'50%'}} className='mb-3'>
-                <TextField
-                    value={data?.githubName}
-                    onChange={(e) => handleDataChange('githubName', e.target.value)}
-                    className='w-full'
-                    id="standard-basic"
-                    label=""
-                    variant="standard"
-                    placeholder={intl.get('githubName')}
-                />
-            </div>
-            <FormGroup style={{flexDirection:'row',justifyContent: 'space-between'}}>
-                {
-                    githubCheckArr.map((item, index) => {
-                        return (
-                            <FormControlLabel key={index} control={
-                                <Checkbox
-                                    onChange={(e) => {
-                                        handleCheckChange(e.target.value, e.target.checked)
-                                    }}
-                                    value={item}
-                                />} label={intl.get(item)}
-                            />
-                        )
-                    })
-                }
-            </FormGroup>
-        </Card>
+        <div className={'m-3'}>
+            <Card style={{minWidth:'400px'}} className='p-6'>
+                <OnTitle value={'GitHub'} />
+                <div style={{width:'100%'}} className='mb-3'>
+                    <TextField
+                        value={data?.githubName}
+                        onChange={(e) => handleDataChange('githubName', e.target.value)}
+                        className='w-full'
+                        id="standard-basic"
+                        label=""
+                        variant="standard"
+                        placeholder={intl.get('githubName')}
+                    />
+                </div>
+                <FormGroup>
+                    {
+                        githubCheckArr.map((item, index) => {
+                            return (
+                                <FormControlLabel key={index} control={
+                                    <Checkbox
+                                        onChange={(e) => {
+                                            handleCheckChange(e.target.value, e.target.checked)
+                                        }}
+                                        value={item}
+                                    />} label={intl.get(item)}
+                                />
+                            )
+                        })
+                    }
+                </FormGroup>
+            </Card>
+        </div>
     )
 }
 export default GitHubAddOns

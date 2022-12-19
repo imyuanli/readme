@@ -4,6 +4,7 @@ import intl from "react-intl-universal";
 import GitHubAddOns from "@/components/add-ons/github-add-ons";
 import TypeWriter from "@/components/add-ons/type-writer";
 import OtherAddOns from "@/components/add-ons/other-add-ons";
+import SocialContact from "@/components/add-ons/social-contact";
 
 interface props {
     data: any
@@ -15,15 +16,18 @@ const AddOns: React.FunctionComponent<props> = ({data, handleDataChange, handleC
     return (
         <div className='mb-8'>
             <BaseTitle value={intl.get('bsAddOns')}/>
-            <div className='flex flex-wrap w-full'>
+            <div className='flex'>
+                <GitHubAddOns
+                    data={data}
+                    handleDataChange={handleDataChange}
+                    handleCheckChange={handleCheckChange}
+                />
 
-                <div className='w-full m-2'>
-                    <GitHubAddOns
-                        data={data}
-                        handleDataChange={handleDataChange}
-                        handleCheckChange={handleCheckChange}
-                    />
-                </div>
+                <SocialContact
+                    data={data}
+                    handleDataChange={handleDataChange}
+                    handleCheckChange={handleCheckChange}
+                />
             </div>
             {/*<OtherAddOns*/}
             {/*    data={data}*/}
