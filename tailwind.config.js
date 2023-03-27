@@ -11,5 +11,8 @@ module.exports = {
         '5/11': '47.7%',
       }
     }
+  },
+  corePlugins: {
+    preflight: false
   }
 }
