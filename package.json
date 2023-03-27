@@ -3,8 +3,6 @@
   "author": "yuanli <2865437316@qq.com>",
   "homepage": "https://imyuanli.github.io/",
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
     "dev": "umi dev",
     "build": "umi build",
     "postinstall": "umi setup",
@@ -12,11 +10,8 @@
     "start": "npm run dev"
   },
   "dependencies": {
-    "@emotion/react": "^11.10.4",
-    "@emotion/styled": "^11.10.4",
-    "@mui/icons-material": "^5.10.9",
-    "@mui/material": "^5.10.7",
-    "gh-pages": "^4.0.0",
+    "@ant-design/icons": "^5.0.1",
+    "antd": "^5.3.2",
     "react-intl-universal": "^2.6.6",
     "umi": "^4.0.22",
     "umi-plugin-locale": "^2.11.7",
