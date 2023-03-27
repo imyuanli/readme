@@ -1,36 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-h1 {
-    font-size: 2em;
-    font-weight: bold;
+
+.flex-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-h2 {
-    font-size: 1.5em;
-    font-weight: bold;
-}
-
-h3 {
-    font-size: 1.17em;
-    font-weight: bold;
-}
-
-h4 {
-    font-weight: bold;
-}
-
-h5 {
-    font-weight: bold;
-    font-size: 0.83em;
-}
-
-h6 {
-    font-weight: bold;
-    font-size: 0.67em;
-}
-
-a {
-    color: -webkit-link;
-    text-decoration: underline;
+.full-screen{
+    height: calc(100vh - 80px);
 }
