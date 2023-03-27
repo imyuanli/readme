@@ -147,15 +147,6 @@ export const DEFAULT_LIST = [
 
 export const DEFAULT_SECTIONS = [
     {
-        type: 'title-and-description',
-        name: 'Title and Description',
-        markdown: `
-# Project Title
-
-A brief description of what this project does and who it's for
-`,
-    },
-    {
         type: 'installation',
         name: 'Installation',
         markdown: `
