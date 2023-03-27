@@ -1,7 +1,8 @@
-import React, {useState} from "react";
-import Item from "antd/es/list/Item";
+import React from "react";
 import {DEFAULT_SECTIONS} from "@/constants/default";
-import {Button} from "antd";
+import {Button, Card, Divider} from "antd";
+import {RedoOutlined} from "@ant-design/icons";
+import {useSetState} from "ahooks";
 // import {DEFAULT_DATA, DEFAULT_PREFIX, DEFAULT_LINK} from "@/constants/default";
 // import SubTitle from "@/components/subtitle";
 // import Detail from "@/components/detail";
@@ -11,6 +12,21 @@ import {Button} from "antd";
 // import MarkDown from "@/components/markdown";
 
 export default function HomePage() {
+    const [state, setState] = useSetState<any>({
+        useCases: DEFAULT_SECTIONS,
+        addedCase: []
+    })
+    const {useCases, addedCase} = state
+
+    const handleChangeCase = (index: any) => {
+        const res = [...useCases]
+        const data = res.splice(index, 1)
+        console.log(data)
+        setState({
+            useCases: [...res],
+            addedCase: [...addedCase, data],
+        })
+    }
     // const [prefix, setPrefix] = useState(DEFAULT_PREFIX)
     // const [data, setData] = useState(DEFAULT_DATA)
     // const [link, setLink] = useState(DEFAULT_LINK)
@@ -59,23 +75,66 @@ export default function HomePage() {
     // }
 
     return (
-        <div className={'p-6 flex h-full'}>
-            <div className={'w-1/5'}>
-                <div>section</div>
-                <div>
-                    {
-                        DEFAULT_SECTIONS.map((item,index)=>{
-                            return(
-                                <div key={index}>
-                                    <Button>{1}</Button>
-                                </div>
-                            )
-                        })
-                    }
+        <div className={'p-3 flex h-full'}>
+            <div className={'grid grid-cols-1 gap-4 h-full p-3'}>
+                <div className={'flex justify-between'}>
+                    <span>section</span>
+                    <Button
+                        icon={<RedoOutlined/>}
+                        type="primary"/>
                 </div>
+                <Card
+                    title={'用例'}
+                    className={'overflow-auto h-full'}
+                >
+                    {useCases.map((item: any, index: any) => {
+                        return (
+                            <div
+                                className={'w-full my-3'}
+                                key={index}
+                                onClick={() => {
+                                    handleChangeCase(index)
+                                }}
+                            >
+                                <Button
+                                    block={true}
+                                    size={'large'}
+                                >
+                                    {item?.name}
+                                </Button>
+                            </div>
+                        )
+                    })}
+                </Card>
+                <Card
+                    title={'已选择'}
+                    className={'overflow-auto h-full'}
+                >
+                    {addedCase.map((item: any, index: any) => {
+                        return (
+                            <div
+                                className={'w-full my-3'}
+                                key={index}
+                            >
+                                <Button
+                                    block={true}
+                                    size={'large'}
+                                    type={'primary'}
+                                >
+                                    {item?.name}
+                                </Button>
+                            </div>
+                        )
+                    })}
+                </Card>
             </div>
-            <div className={'w-4/5'}>
-                123
+            <div className={'w-3/4 flex h-full'}>
+                <div className={'flex-1'}>
+                    <div>12</div>
+                </div>
+                <div className={'flex-1'}>
+                    <div>123</div>
+                </div>
             </div>
         </div>
     );

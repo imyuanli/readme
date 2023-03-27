@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.0.1",
+    "ahooks": "^3.7.6",
     "antd": "^5.3.2",
     "react-beautiful-dnd": "^13.1.1",
     "react-intl-universal": "^2.6.6",

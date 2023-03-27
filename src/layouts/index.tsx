@@ -1,4 +1,8 @@
 import {Link, Outlet} from 'umi';
+import {Layout} from "antd";
+
+const {Header, Footer, Content} = Layout;
+
 // // import styles from './index.less';
 // import intl from 'react-intl-universal';
 // // import {useEffect, useState} from "react";
@@ -13,7 +17,28 @@ import {Link, Outlet} from 'umi';
 //     "zh": zh,
 // };
 // let DEFAULT_PREFIX = {}
-export default function Layout() {
+
+
+const headerStyle: React.CSSProperties = {
+    textAlign: 'center',
+    color: '#fff',
+    height: 64,
+    paddingInline: 50,
+    lineHeight: '64px',
+    backgroundColor: '#7dbcea',
+};
+
+const contentStyle: React.CSSProperties = {
+
+};
+
+const footerStyle: React.CSSProperties = {
+    textAlign: 'center',
+    color: '#fff',
+    backgroundColor: '#7dbcea',
+};
+
+export default function App() {
     // const [initDone, setInitDone] = useState(false)
     // useEffect(() => {
     //     let lang = navigator.language.toLowerCase();
@@ -50,11 +75,14 @@ export default function Layout() {
     //     DEFAULT_PREFIX
     // }
     return (
-        <div className={'max-h-screen w-full h-full'}>
-            <header className={'flex justify-between px-9 py-3 bg-gray-700'}>
+        <Layout className={'max-h-screen min-h-screen'}>
+            <Header style={{height:'5vh'}} className={'flex justify-between items-center'}>
                 <img src="https://readme.so/readme.svg" alt="" className={'h-12'}/>
-            </header>
-            <Outlet/>
-        </div>
+            </Header>
+            <Content style={{height:'92vh'}}>
+                <Outlet/>
+            </Content>
+            <Footer style={{height:'3vh'}}>Footer</Footer>
+        </Layout>
     );
 }
