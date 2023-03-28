@@ -66,7 +66,7 @@ A brief description of what this project does and who it's for
     }, [addedCase])
 
     return (
-        <div className={'p-6 grid grid-cols-5 gap-4 h-full'}>
+        <div className={'p-6 grid grid-cols-7 gap-4 h-full'}>
             <Card className={'col-span-1 grid grid-cols-1 gap-4 h-full p-3 overflow-auto'}>
                 <div className={'flex justify-between'}>
                     <span>section</span>
@@ -107,7 +107,7 @@ A brief description of what this project does and who it's for
                     )
                 })}
             </Card>
-            <div className={'col-span-2 h-full'}>
+            <div className={'col-span-3 h-full'}>
                 <MdEditor
                     modelValue={editorData}
                     preview={false}
@@ -119,7 +119,7 @@ A brief description of what this project does and who it's for
                     style={{height: '100%'}}
                 />
             </div>
-            <Card className={'col-span-2 overflow-auto'}>
+            <Card className={'col-span-3 overflow-auto'}>
                 <MdEditor
                     previewOnly={true}
                     modelValue={previewData}
