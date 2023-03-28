@@ -79,10 +79,9 @@ export default function App() {
             <Header style={{height:'5vh'}} className={'flex justify-between items-center'}>
                 <img src="https://readme.so/readme.svg" alt="" className={'h-12'}/>
             </Header>
-            <Content style={{height:'92vh'}}>
+            <Content style={{height:'95vh'}}>
                 <Outlet/>
             </Content>
-            <Footer style={{height:'3vh'}}>Footer</Footer>
         </Layout>
     );
 }
