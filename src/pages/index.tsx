@@ -1,6 +1,6 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {DEFAULT_SECTIONS} from "@/constants/default";
-import {Button, Card, Input} from "antd";
+import {Button, Dropdown, MenuProps} from "antd";
 import {RedoOutlined} from "@ant-design/icons";
 import {useSetState} from "ahooks";
 import MdEditor from 'md-editor-rt';
@@ -65,9 +65,23 @@ A brief description of what this project does and who it's for
         })
     }, [addedCase])
 
+    // 清除添加的数据
+    const items = [
+        {
+            key: '1',
+            label: '重置',
+        },
+        {
+            key: '2',
+            label: '删除',
+        },
+    ];
+    const onMenuClick: MenuProps['onClick'] = (e) => {
+        console.log('click', e);
+    };
     return (
-        <div className={'p-6 grid grid-cols-7 gap-4 h-full'}>
-            <Card className={'col-span-1 grid grid-cols-1 gap-4 h-full p-3 overflow-auto'}>
+        <div className={'grid grid-cols-5 gap-1 h-full'}>
+            <div className={'col-span-1 grid grid-cols-1 gap-2 h-full overflow-auto p-3 w-full'}>
                 <div className={'flex justify-between'}>
                     <span>section</span>
                     <Button icon={<RedoOutlined/>} type="primary"/>
@@ -75,27 +89,25 @@ A brief description of what this project does and who it's for
                 <div>已选择</div>
                 {addedCase.map((item: any, index: any) => {
                     return (
-                        <Button
+                        <Dropdown.Button
                             key={index}
-                            block={true}
-                            size={'large'}
-                            type={item.type == currentType ? 'primary' : "default"}
                             onClick={() => {
                                 setState({
                                     currentType: item.type
                                 })
                             }}
+                            style={{width:'100%'}}
+                            type={item.type == currentType ? 'primary' : "default"}
+                            menu={{items, onClick: onMenuClick}}
                         >
                             {item?.name}
-                        </Button>
+                        </Dropdown.Button>
                     )
                 })}
                 <div className={'mt-3'}>当前用例</div>
                 {useCases.map((item: any, index: any) => {
                     return (
                         <Button
-                            block={true}
-                            size={'large'}
                             type="dashed"
                             key={index}
                             onClick={() => {
@@ -106,26 +118,47 @@ A brief description of what this project does and who it's for
                         </Button>
                     )
                 })}
-            </Card>
-            <div className={'col-span-3 h-full'}>
+            </div>
+            <div className={'col-span-2 h-full'}>
                 <MdEditor
                     modelValue={editorData}
                     preview={false}
                     onChange={setEditorData}
-                    previewTheme={'vuepress'}
-                    noPrettier={true}
                     showCodeRowNumber={true}
                     footers={['markdownTotal']}
                     style={{height: '100%'}}
+                    noUploadImg={true}
+                    toolbars={[
+                        'bold',
+                        'underline',
+                        'italic',
+                        'strikeThrough',
+                        'title',
+                        'sub',
+                        'sup',
+                        'quote',
+                        'unorderedList',
+                        'orderedList',
+                        'task',
+                        'codeRow',
+                        'code',
+                        'link',
+                        'image',
+                        'table',
+                        'mermaid',
+                        'pageFullscreen',
+                        'htmlPreview',
+                    ]}
                 />
             </div>
-            <Card className={'col-span-3 overflow-auto'}>
+            <div className={'col-span-2 overflow-auto h-full'}>
                 <MdEditor
                     previewOnly={true}
                     modelValue={previewData}
                     previewTheme={'vuepress'}
+                    style={{height: '100%', padding: 10}}
                 />
-            </Card>
+            </div>
         </div>
     );
 }

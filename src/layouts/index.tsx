@@ -76,9 +76,9 @@ export default function App() {
     // }
     return (
         <Layout className={'max-h-screen min-h-screen'}>
-            <Header style={{height:'5vh'}} className={'flex justify-between items-center'}>
+            <header  className={'flex justify-between items-center px-12 bg-gray-800'}>
                 <img src="https://readme.so/readme.svg" alt="" className={'h-12'}/>
-            </Header>
+            </header>
             <Content style={{height:'95vh'}}>
                 <Outlet/>
             </Content>
