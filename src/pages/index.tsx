@@ -1,16 +1,18 @@
 import React, {useEffect, useState} from "react";
-import {DEFAULT_SECTIONS} from "@/constants/default";
-import {Button, Dropdown, MenuProps} from "antd";
-import {RedoOutlined} from "@ant-design/icons";
+import {DEFAULT_SECTIONS_LIST} from "@/constants/default";
+import {Button, Dropdown, MenuProps, Tooltip} from "antd";
+import {DragOutlined, RedoOutlined} from "@ant-design/icons";
 import {useSetState} from "ahooks";
 import MdEditor from 'md-editor-rt';
 import 'md-editor-rt/lib/style.css';
+import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
+import _ from "lodash";
 
 export default function HomePage() {
     //全部的值
     const [state, setState] = useSetState<any>({
-        useCases: DEFAULT_SECTIONS,
-        addedCase: [
+        sectionList: DEFAULT_SECTIONS_LIST,
+        selectList: [
             {
                 type: 'title-and-description',
                 name: 'Title and Description',
@@ -25,21 +27,21 @@ A brief description of what this project does and who it's for
         editorData: '',
         previewData: ''
     })
-    const {useCases, addedCase, currentType, previewData} = state
+    const {sectionList, selectList, currentType, previewData} = state
 
     //增加新的case
     const handleChangeCase = (index: any) => {
-        const res = [...useCases]
+        const res = [...sectionList]
         const [data]: any = res.splice(index, 1)
         setState({
-            useCases: [...res],
-            addedCase: [...addedCase, data],
+            sectionList: [...res],
+            selectList: [...selectList, data],
             currentType: data.type
         })
     }
 
     //获取当前md
-    const getCurrentMD = () => addedCase.find((item: any) => item.type == currentType).markdown
+    const getCurrentMD = () => selectList.find((item: any) => item.type == currentType).markdown
 
     //编辑器
     const [editorData, setEditorData] = useState<any>("")
@@ -49,21 +51,21 @@ A brief description of what this project does and who it's for
 
     //更改addedCase对应的值
     useEffect(() => {
-        const res = [...addedCase]
+        const res = [...selectList]
         const filterData = res.find((item: any) => item.type == currentType)
         filterData.markdown = editorData
         setState({
-            addedCase: [...res]
+            selectList: [...res]
         })
     }, [editorData])
 
     //预览更新的值
     useEffect(() => {
-        const res = addedCase.reduce((pre: any, cur: any) => pre + cur.markdown + '\n', "")
+        const res = selectList.reduce((pre: any, cur: any) => pre + cur.markdown + '\n', "")
         setState({
             previewData: res
         })
-    }, [addedCase])
+    }, [selectList])
 
     // 清除添加的数据
     const items = [
@@ -79,6 +81,21 @@ A brief description of what this project does and who it's for
     const onMenuClick: MenuProps['onClick'] = (e) => {
         console.log('click', e);
     };
+
+    //拖拽
+    const onDragEnd = (result: any) => {
+        const sourceIndex = result.source.index;
+        const destinationIndex = result.destination.index;
+        if (sourceIndex === destinationIndex) {
+            return;
+        }
+        const list = [...selectList];
+        const [draggedItem] = list.splice(sourceIndex, 1);
+        list.splice(destinationIndex, 0, draggedItem);
+        setState({
+            selectList: [...list]
+        })
+    }
     return (
         <div className={'grid grid-cols-5 gap-2 h-full'}>
             <div className={'col-span-1 h-full overflow-auto p-3 w-full'}>
@@ -86,28 +103,65 @@ A brief description of what this project does and who it's for
                     <span>section</span>
                     <Button icon={<RedoOutlined/>} type="primary"/>
                 </div>
-                <div className={'mb-3'}>
+                <div className={'mb-3 w-full'}>
                     <div className={'mb-1 text-lg'}>已选择</div>
-                    {addedCase.map((item: any, index: any) => {
-                        return (
-                            <Dropdown.Button
-                                className={'my-2'}
-                                key={index}
-                                onClick={() => {
-                                    setState({
-                                        currentType: item.type
-                                    })
-                                }}
-                                type={item.type == currentType ? 'primary' : "default"}
-                                menu={{items, onClick: onMenuClick}}
-                            >
-                                {item?.name}
-                            </Dropdown.Button>
-                        )
-                    })}
+                    <DragDropContext onDragEnd={onDragEnd}>
+                        <Droppable droppableId={_.uniqueId("droppableId")}>
+                            {(provided: any) => {
+                                return (
+                                    <div
+                                        ref={provided.innerRef}
+                                        {...provided.droppableProps}
+                                        className={'w-full'}
+                                    >
+                                        {selectList?.map((item: any, index: any) => {
+                                                return (
+                                                    <Draggable
+                                                        key={item?.name}
+                                                        draggableId={item?.name}
+                                                        index={index}
+                                                    >
+                                                        {(provided: any) => {
+                                                            return (
+                                                                <div
+                                                                    ref={provided.innerRef}
+                                                                    {...provided.draggableProps}
+                                                                    className={'flex-center w-full'}
+                                                                >
+                                                                    <Button
+                                                                        {...provided.dragHandleProps}
+                                                                        type={'text'}
+                                                                        icon={<DragOutlined/>}
+                                                                    />
+                                                                    <Dropdown.Button
+                                                                        className={'my-2'}
+                                                                        key={index}
+                                                                        onClick={() => {
+                                                                            setState({
+                                                                                currentType: item.type
+                                                                            })
+                                                                        }}
+                                                                        type={item.type == currentType ? 'primary' : "default"}
+                                                                        menu={{items, onClick: onMenuClick}}
+                                                                    >
+                                                                        {item?.name}
+                                                                    </Dropdown.Button>
+                                                                </div>
+                                                            )
+                                                        }}
+                                                    </Draggable>
+                                                )
+                                            })}
+                                        {provided.placeholder}
+                                    </div>
+                                )
+                            }}
+                        </Droppable>
+                    </DragDropContext>
+
                 </div>
                 <div className={'mb-1 text-lg'}>全部用例</div>
-                {useCases.map((item: any, index: any) => {
+                {sectionList.map((item: any, index: any) => {
                     return (
                         <Button
                             className={'my-1'}
@@ -159,7 +213,7 @@ A brief description of what this project does and who it's for
                 <MdEditor
                     previewOnly={true}
                     modelValue={previewData}
-                    previewTheme={'vuepress'}
+                    previewTheme={'github'}
                     style={{height: '100%', padding: 10}}
                 />
             </div>

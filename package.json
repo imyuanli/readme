@@ -11,9 +11,12 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.0.1",
+    "@types/lodash": "^4.14.192",
+    "@types/react-beautiful-dnd": "^13.1.4",
     "@vavt/md-editor-extension": "^2.0.0",
     "ahooks": "^3.7.6",
     "antd": "^5.3.2",
+    "lodash": "^4.17.21",
     "md-editor-rt": "^2.11.0",
     "react-beautiful-dnd": "^13.1.1",
     "react-intl-universal": "^2.6.6",

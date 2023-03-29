@@ -145,7 +145,7 @@ export const DEFAULT_LIST = [
 ]
 
 
-export const DEFAULT_SECTIONS = [
+export const DEFAULT_SECTIONS_LIST = [
     {
         type: 'installation',
         name: 'Installation',
