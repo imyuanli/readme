@@ -1,5 +1,6 @@
 import {Link, Outlet} from 'umi';
 import {Layout} from "antd";
+import {StyleProvider} from '@ant-design/cssinjs';
 
 const {Header, Footer, Content} = Layout;
 
@@ -17,26 +18,6 @@ const {Header, Footer, Content} = Layout;
 //     "zh": zh,
 // };
 // let DEFAULT_PREFIX = {}
-
-
-const headerStyle: React.CSSProperties = {
-    textAlign: 'center',
-    color: '#fff',
-    height: 64,
-    paddingInline: 50,
-    lineHeight: '64px',
-    backgroundColor: '#7dbcea',
-};
-
-const contentStyle: React.CSSProperties = {
-
-};
-
-const footerStyle: React.CSSProperties = {
-    textAlign: 'center',
-    color: '#fff',
-    backgroundColor: '#7dbcea',
-};
 
 export default function App() {
     // const [initDone, setInitDone] = useState(false)
@@ -75,13 +56,15 @@ export default function App() {
     //     DEFAULT_PREFIX
     // }
     return (
-        <Layout className={'max-h-screen min-h-screen'}>
-            <header  className={'flex justify-between items-center px-12 bg-gray-800'}>
-                <img src="https://readme.so/readme.svg" alt="" className={'h-12'}/>
-            </header>
-            <Content style={{height:'95vh'}}>
-                <Outlet/>
-            </Content>
-        </Layout>
+        <StyleProvider hashPriority="high">
+            <Layout className={'max-h-screen min-h-screen'}>
+                <header className={'flex justify-between items-center px-12 bg-gray-800'}>
+                    <img src="https://readme.so/readme.svg" alt="" className={'h-12'}/>
+                </header>
+                <Content style={{height: '95vh'}}>
+                    <Outlet/>
+                </Content>
+            </Layout>
+        </StyleProvider>
     );
 }

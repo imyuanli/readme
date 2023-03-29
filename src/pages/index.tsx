@@ -80,34 +80,38 @@ A brief description of what this project does and who it's for
         console.log('click', e);
     };
     return (
-        <div className={'grid grid-cols-5 gap-1 h-full'}>
-            <div className={'col-span-1 grid grid-cols-1 gap-2 h-full overflow-auto p-3 w-full'}>
+        <div className={'grid grid-cols-5 gap-2 h-full'}>
+            <div className={'col-span-1 h-full overflow-auto p-3 w-full'}>
                 <div className={'flex justify-between'}>
                     <span>section</span>
                     <Button icon={<RedoOutlined/>} type="primary"/>
                 </div>
-                <div>已选择</div>
-                {addedCase.map((item: any, index: any) => {
-                    return (
-                        <Dropdown.Button
-                            key={index}
-                            onClick={() => {
-                                setState({
-                                    currentType: item.type
-                                })
-                            }}
-                            style={{width:'100%'}}
-                            type={item.type == currentType ? 'primary' : "default"}
-                            menu={{items, onClick: onMenuClick}}
-                        >
-                            {item?.name}
-                        </Dropdown.Button>
-                    )
-                })}
-                <div className={'mt-3'}>当前用例</div>
+                <div className={'mb-3'}>
+                    <div className={'mb-1 text-lg'}>已选择</div>
+                    {addedCase.map((item: any, index: any) => {
+                        return (
+                            <Dropdown.Button
+                                className={'my-2'}
+                                key={index}
+                                onClick={() => {
+                                    setState({
+                                        currentType: item.type
+                                    })
+                                }}
+                                type={item.type == currentType ? 'primary' : "default"}
+                                menu={{items, onClick: onMenuClick}}
+                            >
+                                {item?.name}
+                            </Dropdown.Button>
+                        )
+                    })}
+                </div>
+                <div className={'mb-1 text-lg'}>全部用例</div>
                 {useCases.map((item: any, index: any) => {
                     return (
                         <Button
+                            className={'my-1'}
+                            block={true}
                             type="dashed"
                             key={index}
                             onClick={() => {
