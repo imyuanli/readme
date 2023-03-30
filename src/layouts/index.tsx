@@ -2,7 +2,6 @@ import {Link, Outlet} from 'umi';
 import {Layout} from "antd";
 import {StyleProvider} from '@ant-design/cssinjs';
 
-const {Header, Footer, Content} = Layout;
 
 // // import styles from './index.less';
 // import intl from 'react-intl-universal';
