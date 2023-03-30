@@ -36,3 +36,11 @@ body{
 .ant-btn{
     width: 100%;
 }
+
+.md-editor-toolbar-wrapper{
+    height: 50px !important;
+}
+
+.md-editor-toolbar{
+    overflow-x: auto;
+}

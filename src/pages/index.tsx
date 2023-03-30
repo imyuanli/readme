@@ -1,13 +1,15 @@
 import React, {useEffect, useState} from "react";
 import {DEFAULT_SECTIONS_LIST} from "@/constants/default";
-import {Button, Dropdown, MenuProps, Tooltip} from "antd";
-import {DragOutlined, RedoOutlined} from "@ant-design/icons";
+import {Button, Dropdown, Layout, MenuProps, Modal} from "antd";
+import {DragOutlined, PlusOutlined} from "@ant-design/icons";
 import {useSetState} from "ahooks";
 import MdEditor from 'md-editor-rt';
 import 'md-editor-rt/lib/style.css';
 import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
 import _ from "lodash";
+import {index} from "@umijs/utils/compiled/cheerio/lib/api/traversing";
 
+const {Content} = Layout;
 export default function HomePage() {
     //全部的值
     const [state, setState] = useSetState<any>({
@@ -25,9 +27,10 @@ A brief description of what this project does and who it's for
         ],
         currentType: 'title-and-description',
         editorData: '',
-        previewData: ''
+        previewData: '',
+        isModalOpen: false
     })
-    const {sectionList, selectList, currentType, previewData} = state
+    const {sectionList, selectList, currentType, previewData, isModalOpen} = state
 
     //增加新的case
     const handleChangeCase = (index: any) => {
@@ -96,127 +99,159 @@ A brief description of what this project does and who it's for
             selectList: [...list]
         })
     }
-    return (
-        <div className={'grid grid-cols-5 gap-2 h-full'}>
-            <div className={'col-span-1 h-full overflow-auto p-3 w-full'}>
-                <div className={'flex justify-between'}>
-                    <span>section</span>
-                    <Button icon={<RedoOutlined/>} type="primary"/>
-                </div>
-                <div className={'mb-3 w-full'}>
-                    <div className={'mb-1 text-lg'}>已选择</div>
-                    <DragDropContext onDragEnd={onDragEnd}>
-                        <Droppable droppableId={_.uniqueId("droppableId")}>
-                            {(provided: any) => {
-                                return (
-                                    <div
-                                        ref={provided.innerRef}
-                                        {...provided.droppableProps}
-                                        className={'w-full'}
-                                    >
-                                        {selectList?.map((item: any, index: any) => {
-                                                return (
-                                                    <Draggable
-                                                        key={item?.name}
-                                                        draggableId={item?.name}
-                                                        index={index}
-                                                    >
-                                                        {(provided: any) => {
-                                                            return (
-                                                                <div
-                                                                    ref={provided.innerRef}
-                                                                    {...provided.draggableProps}
-                                                                    className={'flex-center w-full'}
-                                                                >
-                                                                    <Button
-                                                                        {...provided.dragHandleProps}
-                                                                        type={'text'}
-                                                                        icon={<DragOutlined/>}
-                                                                    />
-                                                                    <Dropdown.Button
-                                                                        className={'my-2'}
-                                                                        key={index}
-                                                                        onClick={() => {
-                                                                            setState({
-                                                                                currentType: item.type
-                                                                            })
-                                                                        }}
-                                                                        type={item.type == currentType ? 'primary' : "default"}
-                                                                        menu={{items, onClick: onMenuClick}}
-                                                                    >
-                                                                        {item?.name}
-                                                                    </Dropdown.Button>
-                                                                </div>
-                                                            )
-                                                        }}
-                                                    </Draggable>
-                                                )
-                                            })}
-                                        {provided.placeholder}
-                                    </div>
-                                )
-                            }}
-                        </Droppable>
-                    </DragDropContext>
 
+    //自定义模板
+    return (
+        <Layout className={'max-h-screen min-h-screen'}>
+            <header className={'flex justify-between items-center px-12 bg-gray-800'}>
+                <img src="https://readme.so/readme.svg" alt="" className={'h-12'}/>
+            </header>
+            <Content style={{height: '95vh'}}>
+                <div className={'grid grid-cols-5 gap-2 h-full'}>
+                    <div className={'col-span-1 h-full overflow-auto p-3 w-full'}>
+                        <div className={'mb-3 w-full'}>
+                            <div className={'mb-1 text-base'}>已选择模板</div>
+                            <DragDropContext onDragEnd={onDragEnd}>
+                                <Droppable droppableId={_.uniqueId("droppableId")}>
+                                    {(provided: any) => {
+                                        return (
+                                            <div
+                                                ref={provided.innerRef}
+                                                {...provided.droppableProps}
+                                                className={'w-full'}
+                                            >
+                                                {selectList?.map((item: any, index: any) => {
+                                                    return (
+                                                        <Draggable
+                                                            key={item?.name}
+                                                            draggableId={item?.name}
+                                                            index={index}
+                                                        >
+                                                            {(provided: any) => {
+                                                                return (
+                                                                    <div
+                                                                        ref={provided.innerRef}
+                                                                        {...provided.draggableProps}
+                                                                        className={'flex-center w-full'}
+                                                                    >
+                                                                        <Button
+                                                                            {...provided.dragHandleProps}
+                                                                            type={'text'}
+                                                                            icon={<DragOutlined/>}
+                                                                        />
+                                                                        <Dropdown.Button
+                                                                            className={'my-2'}
+                                                                            key={index}
+                                                                            onClick={() => {
+                                                                                setState({
+                                                                                    currentType: item.type
+                                                                                })
+                                                                            }}
+                                                                            type={item.type == currentType ? 'primary' : "default"}
+                                                                            menu={{items, onClick: onMenuClick}}
+                                                                        >
+                                                                            {item?.name}
+                                                                        </Dropdown.Button>
+                                                                    </div>
+                                                                )
+                                                            }}
+                                                        </Draggable>
+                                                    )
+                                                })}
+                                                {provided.placeholder}
+                                            </div>
+                                        )
+                                    }}
+                                </Droppable>
+                            </DragDropContext>
+                            <Button
+                                className={'my-1'}
+                                block={true}
+                                icon={<PlusOutlined/>}
+                                onClick={() => {
+                                    setState({
+                                        isModalOpen: true
+                                    })
+                                }}
+                            >
+                                <span className={'font-bold'}>自定义模板</span>
+                            </Button>
+                        </div>
+                        <div className={'mb-1 text-base'}>配置模板</div>
+                        {sectionList.map((item: any, index: any) => {
+                            return (
+                                <Button
+                                    className={'my-1'}
+                                    block={true}
+                                    type="dashed"
+                                    key={index}
+                                    onClick={() => {
+                                        handleChangeCase(index)
+                                    }}
+                                >
+                                    {item?.name}
+                                </Button>
+                            )
+                        })}
+                    </div>
+                    <div className={'col-span-2 h-full'}>
+                        <MdEditor
+                            modelValue={editorData}
+                            preview={false}
+                            onChange={setEditorData}
+                            showCodeRowNumber={true}
+                            footers={['markdownTotal']}
+                            style={{height: '100%'}}
+                            noUploadImg={true}
+                            toolbars={[
+                                'bold',
+                                'underline',
+                                'italic',
+                                'strikeThrough',
+                                'title',
+                                'sub',
+                                'sup',
+                                'quote',
+                                'unorderedList',
+                                'orderedList',
+                                'task',
+                                'codeRow',
+                                'code',
+                                'link',
+                                'image',
+                                'table',
+                                'mermaid',
+                                'pageFullscreen',
+                                'htmlPreview',
+                            ]}
+                        />
+                    </div>
+                    <div className={'col-span-2 overflow-auto h-full'}>
+                        <MdEditor
+                            previewOnly={true}
+                            modelValue={previewData}
+                            previewTheme={'github'}
+                            style={{height: '100%', padding: 10}}
+                        />
+                    </div>
                 </div>
-                <div className={'mb-1 text-lg'}>全部用例</div>
-                {sectionList.map((item: any, index: any) => {
-                    return (
-                        <Button
-                            className={'my-1'}
-                            block={true}
-                            type="dashed"
-                            key={index}
-                            onClick={() => {
-                                handleChangeCase(index)
-                            }}
-                        >
-                            {item?.name}
-                        </Button>
-                    )
-                })}
-            </div>
-            <div className={'col-span-2 h-full'}>
-                <MdEditor
-                    modelValue={editorData}
-                    preview={false}
-                    onChange={setEditorData}
-                    showCodeRowNumber={true}
-                    footers={['markdownTotal']}
-                    style={{height: '100%'}}
-                    noUploadImg={true}
-                    toolbars={[
-                        'bold',
-                        'underline',
-                        'italic',
-                        'strikeThrough',
-                        'title',
-                        'sub',
-                        'sup',
-                        'quote',
-                        'unorderedList',
-                        'orderedList',
-                        'task',
-                        'codeRow',
-                        'code',
-                        'link',
-                        'image',
-                        'table',
-                        'mermaid',
-                        'pageFullscreen',
-                        'htmlPreview',
-                    ]}
-                />
-            </div>
-            <div className={'col-span-2 overflow-auto h-full'}>
-                <MdEditor
-                    previewOnly={true}
-                    modelValue={previewData}
-                    previewTheme={'github'}
-                    style={{height: '100%', padding: 10}}
-                />
-            </div>
-        </div>
+            </Content>
+            <Modal
+                title="Basic Modal"
+                open={isModalOpen}
+                onOk={() => {
+                    console.log(123)
+                }}
+                onCancel={() => {
+                    setState({
+                        isModalOpen: false
+                    })
+                }}
+            >
+                <p>Some contents...</p>
+                <p>Some contents...</p>
+                <p>Some contents...</p>
+            </Modal>
+        </Layout>
     );
 }
