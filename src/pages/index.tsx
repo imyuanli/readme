@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {DEFAULT_SECTIONS_LIST} from "@/constants/default";
-import {Button, Dropdown, Layout, MenuProps, Modal} from "antd";
+import {Button, Dropdown, Input, Layout, MenuProps, Modal} from "antd";
 import {DragOutlined, PlusOutlined} from "@ant-design/icons";
 import {useSetState} from "ahooks";
 import MdEditor from 'md-editor-rt';
@@ -8,6 +8,7 @@ import 'md-editor-rt/lib/style.css';
 import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
 import _ from "lodash";
 import {index} from "@umijs/utils/compiled/cheerio/lib/api/traversing";
+import {nanoid} from "nanoid";
 
 const {Content} = Layout;
 export default function HomePage() {
@@ -28,9 +29,10 @@ A brief description of what this project does and who it's for
         currentType: 'title-and-description',
         editorData: '',
         previewData: '',
-        isModalOpen: false
+        isModalOpen: false,
+        inputValue: ''
     })
-    const {sectionList, selectList, currentType, previewData, isModalOpen} = state
+    const {sectionList, selectList, currentType, previewData, isModalOpen, inputValue} = state
 
     //增加新的case
     const handleChangeCase = (index: any) => {
@@ -101,6 +103,22 @@ A brief description of what this project does and who it's for
     }
 
     //自定义模板
+    const addNewSection = () => {
+        const res = [...selectList]
+        const type = nanoid()
+        res.push({
+            type,
+            name: inputValue,
+            markdown: `## ${inputValue}`,
+        })
+        setState({
+            selectList: [...res],
+            currentType: type,
+            inputValue: "",
+            isModalOpen: false
+        })
+    }
+
     return (
         <Layout className={'max-h-screen min-h-screen'}>
             <header className={'flex justify-between items-center px-12 bg-gray-800'}>
@@ -109,7 +127,7 @@ A brief description of what this project does and who it's for
             <Content style={{height: '95vh'}}>
                 <div className={'grid grid-cols-5 gap-2 h-full'}>
                     <div className={'col-span-1 h-full overflow-auto p-3 w-full'}>
-                        <div className={'mb-3 w-full'}>
+                        <div className={'is-select mb-3 w-full'}>
                             <div className={'mb-1 text-base'}>已选择模板</div>
                             <DragDropContext onDragEnd={onDragEnd}>
                                 <Droppable droppableId={_.uniqueId("droppableId")}>
@@ -237,20 +255,25 @@ A brief description of what this project does and who it's for
                 </div>
             </Content>
             <Modal
-                title="Basic Modal"
+                title="添加自定义模板"
                 open={isModalOpen}
-                onOk={() => {
-                    console.log(123)
-                }}
+                onOk={addNewSection}
                 onCancel={() => {
                     setState({
-                        isModalOpen: false
+                        isModalOpen: false,
+                        inputValue: "",
                     })
                 }}
             >
-                <p>Some contents...</p>
-                <p>Some contents...</p>
-                <p>Some contents...</p>
+                <Input
+                    placeholder="模板名称"
+                    value={inputValue}
+                    onChange={(e: any) => {
+                        setState({
+                            inputValue: e.target.value
+                        })
+                    }}
+                />
             </Modal>
         </Layout>
     );
