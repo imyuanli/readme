@@ -145,9 +145,18 @@ export const DEFAULT_LIST = [
 ]
 
 
-export const DEFAULT_SECTIONS_LIST = [
+export const DEFAULT_README_TEMPLATE = [
     {
-        type: 'installation',
+        id: 'title-and-description',
+        name: 'Title and Description',
+        markdown: `
+# Project Title
+
+A brief description of what this project does and who it's for
+`,
+    },
+    {
+        id: 'installation',
         name: 'Installation',
         markdown: `
 ## Installation
@@ -161,7 +170,7 @@ Install my-project with npm
     `,
     },
     {
-        type: 'logo',
+        id: 'logo',
         name: 'Logo',
         markdown: `
 ![Logo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png)
@@ -169,7 +178,7 @@ Install my-project with npm
 `,
     },
     {
-        type: 'run-locally',
+        id: 'run-locally',
         name: 'Run Locally',
         markdown: `
 ## Run Locally
@@ -201,7 +210,7 @@ Start the server
 `,
     },
     {
-        type: 'screenshots',
+        id: 'screenshots',
         name: 'Screenshots',
         markdown: `
 ## Screenshots
@@ -211,7 +220,7 @@ Start the server
 `,
     },
     {
-        type: 'env-variables',
+        id: 'env-variables',
         name: 'Environment Variables',
         markdown: `
 ## Environment Variables
@@ -225,7 +234,7 @@ To run this project, you will need to add the following environment variables to
 `,
     },
     {
-        type: 'features',
+        id: 'features',
         name: 'Features',
         markdown: `
 ## Features
@@ -238,7 +247,7 @@ To run this project, you will need to add the following environment variables to
 `,
     },
     {
-        type: 'usage-examples',
+        id: 'usage-examples',
         name: 'Usage/Examples',
         markdown: `
 ## Usage/Examples
@@ -254,7 +263,7 @@ function App() {
 `,
     },
     {
-        type: 'api',
+        id: 'api',
         name: 'API Reference',
         markdown: `
 ## API Reference
@@ -286,7 +295,7 @@ Takes two numbers and returns the sum.
 `,
     },
     {
-        type: 'contributing',
+        id: 'contributing',
         name: 'Contributing',
         markdown: `
 ## Contributing
@@ -300,7 +309,7 @@ Please adhere to this project's \`code of conduct\`.
 `,
     },
     {
-        type: 'tests',
+        id: 'tests',
         name: 'Running Tests',
         markdown: `
 ## Running Tests
@@ -314,7 +323,7 @@ To run tests, run the following command
 `,
     },
     {
-        type: 'license',
+        id: 'license',
         name: 'License',
         markdown: `
 ## License
@@ -324,7 +333,7 @@ To run tests, run the following command
 `,
     },
     {
-        type: 'badges',
+        id: 'badges',
         name: 'Badges',
         markdown: `
 ## Badges
@@ -338,7 +347,7 @@ Add badges from somewhere like: [shields.io](https://shields.io/)
 `,
     },
     {
-        type: 'roadmap',
+        id: 'roadmap',
         name: 'Roadmap',
         markdown: `
 ## Roadmap
@@ -350,7 +359,7 @@ Add badges from somewhere like: [shields.io](https://shields.io/)
 `,
     },
     {
-        type: 'authors',
+        id: 'authors',
         name: 'Authors',
         markdown: `
 ## Authors
@@ -360,7 +369,7 @@ Add badges from somewhere like: [shields.io](https://shields.io/)
 `,
     },
     {
-        type: 'acknowledgement',
+        id: 'acknowledgement',
         name: 'Acknowledgements',
         markdown: `
 ## Acknowledgements
@@ -372,7 +381,7 @@ Add badges from somewhere like: [shields.io](https://shields.io/)
 `,
     },
     {
-        type: 'support',
+        id: 'support',
         name: 'Support',
         markdown: `
 ## Support
@@ -382,7 +391,7 @@ For support, email fake@fake.com or join our Slack channel.
 `,
     },
     {
-        type: 'feedback',
+        id: 'feedback',
         name: 'Feedback',
         markdown: `
 ## Feedback
@@ -392,7 +401,7 @@ If you have any feedback, please reach out to us at fake@fake.com
 `,
     },
     {
-        type: 'related',
+        id: 'related',
         name: 'Related',
         markdown: `
 ## Related
@@ -404,7 +413,7 @@ Here are some related projects
 `,
     },
     {
-        type: 'demo',
+        id: 'demo',
         name: 'Demo',
         markdown: `
 ## Demo
@@ -414,7 +423,7 @@ Insert gif or link to demo
 `,
     },
     {
-        type: 'tech',
+        id: 'tech',
         name: 'Tech',
         markdown: `
 ## Tech Stack
@@ -426,7 +435,7 @@ Insert gif or link to demo
 `,
     },
     {
-        type: 'optimizations',
+        id: 'optimizations',
         name: 'Optimizations',
         markdown: `
 ## Optimizations
@@ -436,7 +445,7 @@ What optimizations did you make in your code? E.g. refactors, performance improv
 `,
     },
     {
-        type: 'lessons',
+        id: 'lessons',
         name: 'Lessons',
         markdown: `
 ## Lessons Learned
@@ -446,7 +455,7 @@ What did you learn while building this project? What challenges did you face and
 `,
     },
     {
-        type: 'faq',
+        id: 'faq',
         name: 'FAQ',
         markdown: `
 ## FAQ
@@ -462,7 +471,7 @@ Answer 2
 `,
     },
     {
-        type: 'used-by',
+        id: 'used-by',
         name: 'Used By',
         markdown: `
 ## Used By
@@ -475,7 +484,7 @@ This project is used by the following companies:
 `,
     },
     {
-        type: 'documentation',
+        id: 'documentation',
         name: 'Documentation',
         markdown: `
 ## Documentation
@@ -485,7 +494,7 @@ This project is used by the following companies:
 `,
     },
     {
-        type: 'deployment',
+        id: 'deployment',
         name: 'Deployment',
         markdown: `
 ## Deployment
@@ -499,7 +508,7 @@ To deploy this project run
 `,
     },
     {
-        type: 'appendix',
+        id: 'appendix',
         name: 'Appendix',
         markdown: `
 ## Appendix
@@ -509,7 +518,7 @@ Any additional information goes here
 `,
     },
     {
-        type: 'github-profile-intro',
+        id: 'github-profile-intro',
         name: 'Github Profile - Introduction',
         markdown: `
 # Hi, I'm Katherine! 👋
@@ -517,7 +526,7 @@ Any additional information goes here
 `,
     },
     {
-        type: 'github-profile-about-me',
+        id: 'github-profile-about-me',
         name: 'Github Profile - About Me',
         markdown: `
 ## 🚀 About Me
@@ -526,7 +535,7 @@ I'm a full stack developer...
 `,
     },
     {
-        type: 'github-profile-skills',
+        id: 'github-profile-skills',
         name: 'Github Profile - Skills',
         markdown: `
 ## 🛠 Skills
@@ -535,7 +544,7 @@ Javascript, HTML, CSS...
 `,
     },
     {
-        type: 'github-profile-links',
+        id: 'github-profile-links',
         name: 'Github Profile - Links',
         markdown: `
 ## 🔗 Links
@@ -546,7 +555,7 @@ Javascript, HTML, CSS...
 `,
     },
     {
-        type: 'github-profile-other',
+        id: 'github-profile-other',
         name: 'Github Profile - Other',
         markdown: `
 ## Other Common Github Profile Sections
@@ -569,7 +578,7 @@ Javascript, HTML, CSS...
 `,
     },
     {
-        type: 'colorreference',
+        id: 'color-reference',
         name: 'Color Reference',
         markdown: `## Color Reference
 

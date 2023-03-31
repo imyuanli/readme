@@ -1,76 +1,114 @@
 import React, {useEffect, useState} from "react";
-import {DEFAULT_SECTIONS_LIST} from "@/constants/default";
-import {Button, Dropdown, Input, Layout, MenuProps, Modal} from "antd";
+import {DEFAULT_README_TEMPLATE} from "@/constants/default";
+import {Button, Dropdown, Input, Layout, Modal} from "antd";
 import {DragOutlined, PlusOutlined} from "@ant-design/icons";
-import {useSetState} from "ahooks";
+import {useLocalStorageState, useSetState} from "ahooks";
 import MdEditor from 'md-editor-rt';
 import 'md-editor-rt/lib/style.css';
 import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
 import _ from "lodash";
-import {index} from "@umijs/utils/compiled/cheerio/lib/api/traversing";
 import {nanoid} from "nanoid";
 
 const {Content} = Layout;
 export default function HomePage() {
-    //全部的值
+    //默认模板
+    const [templateList, setTemplateList] = useLocalStorageState<any | undefined>(
+        'templateList',
+        {
+            defaultValue: DEFAULT_README_TEMPLATE,
+        },
+    );
+
+    //选择的模板
+    const [selectIdArr, setSelectIdArr] = useLocalStorageState<any | undefined>(
+        'selectIdArr',
+        {
+            defaultValue: ['title-and-description'],
+        },
+    );
+
+    //当前模板
+    const [currentId, setCurrentId] = useLocalStorageState<any | undefined>(
+        'currentId',
+        {
+            defaultValue: 'title-and-description',
+        },
+    );
+
+    //模板中是否包含已选择的
+    const isHaveInTemplate = (id: string) => selectIdArr.includes(id)
+
+    //获取已经选择的模板
+    const getSelectTemplate: any = () => selectIdArr.map((id: any) => templateList.find((item: any) => item.id === id))
+
+    //剩余的值
     const [state, setState] = useSetState<any>({
-        sectionList: DEFAULT_SECTIONS_LIST,
-        selectList: [
-            {
-                type: 'title-and-description',
-                name: 'Title and Description',
-                markdown: `
-# Project Title
-
-A brief description of what this project does and who it's for
-`,
-            }
-        ],
-        currentType: 'title-and-description',
-        editorData: '',
         previewData: '',
-        isModalOpen: false,
-        inputValue: ''
+        // isModalOpen: false,
+        // inputValue: ''
     })
-    const {sectionList, selectList, currentType, previewData, isModalOpen, inputValue} = state
+    const {previewData, isModalOpen, inputValue} = state
 
-    //增加新的case
-    const handleChangeCase = (index: any) => {
-        const res = [...sectionList]
-        const [data]: any = res.splice(index, 1)
-        setState({
-            sectionList: [...res],
-            selectList: [...selectList, data],
-            currentType: data.type
-        })
+    //选择模板
+    const handleSelectTemplate = (id: string) => {
+
+        setSelectIdArr([...selectIdArr, id])
+        setCurrentId(id)
     }
 
     //获取当前md
-    const getCurrentMD = () => selectList.find((item: any) => item.type == currentType).markdown
+    const getCurrentMarkdown = () => templateList.find((item: any) => item.id == currentId).markdown
 
     //编辑器
     const [editorData, setEditorData] = useState<any>("")
     useEffect(() => {
-        setEditorData(getCurrentMD())
-    }, [currentType])
+        setEditorData(getCurrentMarkdown())
+    }, [currentId])
 
-    //更改addedCase对应的值
+    //更改模板的值
     useEffect(() => {
-        const res = [...selectList]
-        const filterData = res.find((item: any) => item.type == currentType)
+        const res = [...templateList]
+        const filterData = res.find((item: any) => item.id == currentId)
         filterData.markdown = editorData
-        setState({
-            selectList: [...res]
-        })
+        setTemplateList([...res])
     }, [editorData])
 
-    //预览更新的值
+    //预览
     useEffect(() => {
-        const res = selectList.reduce((pre: any, cur: any) => pre + cur.markdown + '\n', "")
         setState({
-            previewData: res
+            previewData: getSelectTemplate().reduce((pre: any, cur: any) => pre + cur.markdown, '')
         })
-    }, [selectList])
+    }, [selectIdArr, templateList])
+
+    //拖拽
+    const onDragEnd = (result: any) => {
+        const sourceIndex = result.source.index;
+        const destinationIndex = result.destination.index;
+        if (sourceIndex === destinationIndex) {
+            return;
+        }
+        const idArr = [...selectIdArr];
+        const [draggedItem] = idArr.splice(sourceIndex, 1);
+        idArr.splice(destinationIndex, 0, draggedItem);
+        setSelectIdArr([...idArr])
+    }
+
+    //自定义模板
+    const addNewTemplate = () => {
+        const res = [...templateList]
+        const id = nanoid()
+        res.push({
+            id,
+            name: inputValue,
+            markdown: `## ${inputValue}`,
+        })
+        setTemplateList([...res])
+        setSelectIdArr([...selectIdArr, id])
+        setCurrentId(id)
+        setState({
+            isModalOpen: false
+        })
+    }
 
     // 清除添加的数据
     const items = [
@@ -83,41 +121,29 @@ A brief description of what this project does and who it's for
             label: '删除',
         },
     ];
-    const onMenuClick: MenuProps['onClick'] = (e) => {
-        console.log('click', e);
+    const onMenuClick = (e: any, item: any) => {
+        let key = e.key
+        if (key == 1) {
+            reSetSection(item.type)
+        } else {
+            deleteSection(item.type)
+        }
     };
 
-    //拖拽
-    const onDragEnd = (result: any) => {
-        const sourceIndex = result.source.index;
-        const destinationIndex = result.destination.index;
-        if (sourceIndex === destinationIndex) {
-            return;
-        }
-        const list = [...selectList];
-        const [draggedItem] = list.splice(sourceIndex, 1);
-        list.splice(destinationIndex, 0, draggedItem);
-        setState({
-            selectList: [...list]
-        })
+    //重置
+    const reSetSection = (type: string) => {
+        // const res = [...DEFAULT_SECTIONS_LIST]
+        // const filterData = DEFAULT_SECTIONS_LIST.find((item: any) => item.type == type)
+
+
     }
 
-    //自定义模板
-    const addNewSection = () => {
-        const res = [...selectList]
-        const type = nanoid()
-        res.push({
-            type,
-            name: inputValue,
-            markdown: `## ${inputValue}`,
-        })
-        setState({
-            selectList: [...res],
-            currentType: type,
-            inputValue: "",
-            isModalOpen: false
-        })
+    //删除
+    const deleteSection = (type: string) => {
+
     }
+
+
 
     return (
         <Layout className={'max-h-screen min-h-screen'}>
@@ -138,7 +164,7 @@ A brief description of what this project does and who it's for
                                                 {...provided.droppableProps}
                                                 className={'w-full'}
                                             >
-                                                {selectList?.map((item: any, index: any) => {
+                                                {getSelectTemplate().map((item: any, index: any) => {
                                                     return (
                                                         <Draggable
                                                             key={item?.name}
@@ -161,12 +187,14 @@ A brief description of what this project does and who it's for
                                                                             className={'my-2'}
                                                                             key={index}
                                                                             onClick={() => {
-                                                                                setState({
-                                                                                    currentType: item.type
-                                                                                })
+                                                                                setCurrentId(item.id)
                                                                             }}
-                                                                            type={item.type == currentType ? 'primary' : "default"}
-                                                                            menu={{items, onClick: onMenuClick}}
+                                                                            type={item.id == currentId ? 'primary' : "default"}
+                                                                            menu={{
+                                                                                items, onClick: (e) => {
+                                                                                    onMenuClick(e, item)
+                                                                                }
+                                                                            }}
                                                                         >
                                                                             {item?.name}
                                                                         </Dropdown.Button>
@@ -195,21 +223,23 @@ A brief description of what this project does and who it's for
                                 <span className={'font-bold'}>自定义模板</span>
                             </Button>
                         </div>
-                        <div className={'mb-1 text-base'}>配置模板</div>
-                        {sectionList.map((item: any, index: any) => {
-                            return (
-                                <Button
-                                    className={'my-1'}
-                                    block={true}
-                                    type="dashed"
-                                    key={index}
-                                    onClick={() => {
-                                        handleChangeCase(index)
-                                    }}
-                                >
-                                    {item?.name}
-                                </Button>
-                            )
+                        <div className={'mb-1 text-base'}>模板</div>
+                        {templateList.map((item: any) => {
+                            if (!isHaveInTemplate(item.id)) {
+                                return (
+                                    <Button
+                                        className={'my-1'}
+                                        block={true}
+                                        type="dashed"
+                                        key={item.id}
+                                        onClick={() => {
+                                            handleSelectTemplate(item.id)
+                                        }}
+                                    >
+                                        {item?.name}
+                                    </Button>
+                                )
+                            }
                         })}
                     </div>
                     <div className={'col-span-2 h-full'}>
@@ -257,7 +287,7 @@ A brief description of what this project does and who it's for
             <Modal
                 title="添加自定义模板"
                 open={isModalOpen}
-                onOk={addNewSection}
+                onOk={addNewTemplate}
                 onCancel={() => {
                     setState({
                         isModalOpen: false,
