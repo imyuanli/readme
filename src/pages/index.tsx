@@ -57,7 +57,7 @@ export default function HomePage() {
     }
 
     //获取当前md
-    const getCurrentMarkdown = () => templateList.find((item: any) => item.id == currentId).markdown
+    const getCurrentMarkdown = () => currentId ? templateList.find((item: any) => item.id == currentId).markdown : ""
 
     //编辑器
     const [editorData, setEditorData] = useState<any>("")
@@ -67,10 +67,12 @@ export default function HomePage() {
 
     //更改模板的值
     useEffect(() => {
-        const res = [...templateList]
-        const filterData = res.find((item: any) => item.id == currentId)
-        filterData.markdown = editorData
-        setTemplateList([...res])
+        if (currentId) {
+            const res = [...templateList]
+            const filterData = res.find((item: any) => item.id == currentId)
+            filterData.markdown = editorData
+            setTemplateList([...res])
+        }
     }, [editorData])
 
     //预览
@@ -124,26 +126,31 @@ export default function HomePage() {
     const onMenuClick = (e: any, item: any) => {
         let key = e.key
         if (key == 1) {
-            reSetSection(item.type)
+            reSetSection(item.id)
         } else {
-            deleteSection(item.type)
+            deleteSection(item.id)
         }
     };
 
     //重置
-    const reSetSection = (type: string) => {
-        // const res = [...DEFAULT_SECTIONS_LIST]
-        // const filterData = DEFAULT_SECTIONS_LIST.find((item: any) => item.type == type)
-
-
+    const reSetSection = (id: string) => {
+        const defaultRes = DEFAULT_README_TEMPLATE.find((item: any) => item.id == id)
+        const res = [...templateList]
+        const list = res.find((item: any) => item.id == id)
+        list.markdown = defaultRes ? defaultRes.markdown : `## ${list.name}`
+        setTemplateList([...res])
+        setEditorData(getCurrentMarkdown())
     }
 
     //删除
-    const deleteSection = (type: string) => {
+    const deleteSection = (id: string) => {
+        const res = selectIdArr.filter((item: any) => item !== id)
+        setSelectIdArr([...res])
+        if (currentId === id) {
+            setCurrentId(null)
+        }
 
     }
-
-
 
     return (
         <Layout className={'max-h-screen min-h-screen'}>
