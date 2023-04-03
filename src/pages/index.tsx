@@ -1,13 +1,15 @@
 import React, {useEffect, useState} from "react";
 import {DEFAULT_README_TEMPLATE} from "@/constants/default";
-import {Button, Dropdown, Input, Layout, Modal} from "antd";
-import {DragOutlined, PlusOutlined} from "@ant-design/icons";
+import {Button, Dropdown, Input, Layout, Modal, Tooltip} from "antd";
+import {DragOutlined, ExclamationCircleFilled, PlusOutlined, RedoOutlined} from "@ant-design/icons";
 import {useLocalStorageState, useSetState} from "ahooks";
 import MdEditor from 'md-editor-rt';
 import 'md-editor-rt/lib/style.css';
 import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
 import _ from "lodash";
 import {nanoid} from "nanoid";
+
+const {confirm} = Modal;
 
 const {Content} = Layout;
 export default function HomePage() {
@@ -44,10 +46,11 @@ export default function HomePage() {
     //剩余的值
     const [state, setState] = useSetState<any>({
         previewData: '',
-        // isModalOpen: false,
-        // inputValue: ''
+        isModalOpen: false,
+        inputValue: '',
+        isRestModal: false
     })
-    const {previewData, isModalOpen, inputValue} = state
+    const {previewData, isModalOpen, inputValue, isRestModal} = state
 
     //选择模板
     const handleSelectTemplate = (id: string) => {
@@ -108,7 +111,8 @@ export default function HomePage() {
         setSelectIdArr([...selectIdArr, id])
         setCurrentId(id)
         setState({
-            isModalOpen: false
+            isModalOpen: false,
+            inputValue: ""
         })
     }
 
@@ -152,6 +156,28 @@ export default function HomePage() {
 
     }
 
+    //恢复默认状态
+    const handleRestModal = () => {
+        confirm({
+            title: '恢复初始状态',
+            icon: <ExclamationCircleFilled/>,
+            content: '是否重置您所有自述文件的模板',
+            okText: '确认',
+            cancelText: '取消',
+            onOk() {
+                restoreInitialState()
+            },
+        });
+    }
+    const restoreInitialState = () => {
+        setTemplateList(DEFAULT_README_TEMPLATE)
+        setSelectIdArr(['title-and-description'])
+        setCurrentId('title-and-description')
+        setState({
+            isRestModal: false
+        })
+    }
+
     return (
         <Layout className={'max-h-screen min-h-screen'}>
             <header className={'flex justify-between items-center px-12 bg-gray-800'}>
@@ -160,8 +186,17 @@ export default function HomePage() {
             <Content style={{height: '95vh'}}>
                 <div className={'grid grid-cols-5 gap-2 h-full'}>
                     <div className={'col-span-1 h-full overflow-auto p-3 w-full'}>
-                        <div className={'is-select mb-3 w-full'}>
-                            <div className={'mb-1 text-base'}>已选择模板</div>
+                        <div className={'mb-3 w-full'}>
+                            <div className={'mb-1 text-base flex justify-between'}>
+                                <div>已选择模板</div>
+                                <Tooltip placement="bottom" title={'重置'}>
+                                    <Button
+                                        onClick={handleRestModal}
+                                        type={"primary"}
+                                        icon={<RedoOutlined/>}
+                                    />
+                                </Tooltip>
+                            </div>
                             <DragDropContext onDragEnd={onDragEnd}>
                                 <Droppable droppableId={_.uniqueId("droppableId")}>
                                     {(provided: any) => {
@@ -169,7 +204,7 @@ export default function HomePage() {
                                             <div
                                                 ref={provided.innerRef}
                                                 {...provided.droppableProps}
-                                                className={'w-full'}
+                                                className={'is-select w-full'}
                                             >
                                                 {getSelectTemplate().map((item: any, index: any) => {
                                                     return (
@@ -301,6 +336,8 @@ export default function HomePage() {
                         inputValue: "",
                     })
                 }}
+                okText={'确认'}
+                cancelText={'取消'}
             >
                 <Input
                     placeholder="模板名称"
