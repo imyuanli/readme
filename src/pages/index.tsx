@@ -1,7 +1,14 @@
 import React, {useEffect, useState} from "react";
 import {DEFAULT_README_TEMPLATE} from "@/constants/default";
-import {Button, Dropdown, Input, Layout, Modal, Tooltip} from "antd";
-import {DragOutlined, ExclamationCircleFilled, PlusOutlined, RedoOutlined} from "@ant-design/icons";
+import {Button, Card, Dropdown, Input, Layout, Modal} from "antd";
+import {
+    CopyOutlined,
+    DownloadOutlined,
+    DragOutlined,
+    ExclamationCircleFilled,
+    PlusOutlined,
+    RedoOutlined
+} from "@ant-design/icons";
 import {useLocalStorageState, useSetState} from "ahooks";
 import MdEditor from 'md-editor-rt';
 import 'md-editor-rt/lib/style.css';
@@ -10,7 +17,6 @@ import _ from "lodash";
 import {nanoid} from "nanoid";
 
 const {confirm} = Modal;
-
 const {Content} = Layout;
 export default function HomePage() {
     //默认模板
@@ -179,24 +185,31 @@ export default function HomePage() {
     }
 
     return (
-        <Layout className={'max-h-screen min-h-screen'}>
-            <header className={'flex justify-between items-center px-12 bg-gray-800'}>
-                <img src="https://readme.so/readme.svg" alt="" className={'h-12'}/>
+        <Layout className={'max-h-screen h-screen'}>
+            <header className={'h-[5vh] flex justify-between items-center px-9 bg-gray-800'}>
+                <div>
+                    <img src="https://readme.so/readme.svg" alt="" className={'h-12'}/>
+                </div>
             </header>
-            <Content style={{height: '95vh'}}>
+            <Content className={'h-[95vh] max-[95vh]'}>
                 <div className={'grid grid-cols-5 gap-2 h-full'}>
-                    <div className={'col-span-1 h-full overflow-auto p-3 w-full'}>
+                    <Card
+                        title={'模板'}
+                        className={'col-span-1 h-full overflow-hidden'}
+                        extra={
+                            <Button
+                                onClick={handleRestModal}
+                                type={"primary"}
+                                icon={<RedoOutlined/>}
+                            />
+                        }
+                        bodyStyle={{
+                            height:'95%',
+                            overflow:'auto',
+                        }}
+                    >
+                        <div className={'mb-1 text-base'}>已使用模板</div>
                         <div className={'mb-3 w-full'}>
-                            <div className={'mb-1 text-base flex justify-between'}>
-                                <div>已选择模板</div>
-                                <Tooltip placement="bottom" title={'重置'}>
-                                    <Button
-                                        onClick={handleRestModal}
-                                        type={"primary"}
-                                        icon={<RedoOutlined/>}
-                                    />
-                                </Tooltip>
-                            </div>
                             <DragDropContext onDragEnd={onDragEnd}>
                                 <Droppable droppableId={_.uniqueId("droppableId")}>
                                     {(provided: any) => {
@@ -265,7 +278,7 @@ export default function HomePage() {
                                 <span className={'font-bold'}>自定义模板</span>
                             </Button>
                         </div>
-                        <div className={'mb-1 text-base'}>模板</div>
+                        <div className={'mb-1 text-base'}>未使用模板</div>
                         {templateList.map((item: any) => {
                             if (!isHaveInTemplate(item.id)) {
                                 return (
@@ -283,15 +296,23 @@ export default function HomePage() {
                                 )
                             }
                         })}
-                    </div>
-                    <div className={'col-span-2 h-full'}>
+                    </Card>
+                    <Card
+                        title={'编辑'}
+                        className={'col-span-2 h-full'}
+                        bodyStyle={{
+                            padding:12,
+                            height:'95%',
+                        }}
+                    >
                         <MdEditor
+                            editorId={'editor'}
                             modelValue={editorData}
                             preview={false}
                             onChange={setEditorData}
                             showCodeRowNumber={true}
-                            footers={['markdownTotal']}
                             style={{height: '100%'}}
+                            footers={[]}
                             noUploadImg={true}
                             toolbars={[
                                 'bold',
@@ -315,15 +336,35 @@ export default function HomePage() {
                                 'htmlPreview',
                             ]}
                         />
-                    </div>
-                    <div className={'col-span-2 overflow-auto h-full'}>
+                    </Card>
+                    <Card
+                        title={'预览'}
+                        className={'col-span-2 h-full overflow-hidden'}
+                        extra={<div>
+                            <Button
+                                icon={<CopyOutlined/>}
+                                type={'primary'}
+                                className={'mr-3'}
+                            />
+                            <Button
+                                icon={<DownloadOutlined/>}
+                                type={'primary'}
+                            />
+                        </div>}
+                        bodyStyle={{
+                            height:'95%',
+                            overflow:'auto',
+                        }}
+                    >
                         <MdEditor
+                            editorId={'preview'}
                             previewOnly={true}
                             modelValue={previewData}
                             previewTheme={'github'}
-                            style={{height: '100%', padding: 10}}
+                            codeTheme={'github'}
+                            showCodeRowNumber={true}
                         />
-                    </div>
+                    </Card>
                 </div>
             </Content>
             <Modal

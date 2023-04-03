@@ -38,9 +38,12 @@ body{
 }
 
 .md-editor-toolbar-wrapper{
-    height: 50px !important;
+    height: 56px !important;
 }
 
 .md-editor-toolbar{
     overflow-x: auto;
+}
+.md-editor{
+    border: none!important;
 }
