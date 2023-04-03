@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {DEFAULT_README_TEMPLATE} from "@/constants/default";
-import {Button, Card, Dropdown, Input, Layout, message, Modal} from "antd";
+import {Button, Card, Dropdown, Input, Layout, message, Modal, Select} from "antd";
 import {
     CopyOutlined,
     DownloadOutlined,
@@ -16,11 +16,28 @@ import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
 import _ from "lodash";
 import {nanoid} from "nanoid";
 import copy from 'copy-to-clipboard'
-
+import en from '../locales/en-US'
+import zh from '../locales/zh-CN'
+import { useIntl } from 'umi';
 
 const {confirm} = Modal;
 const {Content} = Layout;
 export default function HomePage() {
+    const intl = useIntl();
+    const msg = intl.formatMessage({
+        id: 'welcome',
+    });
+
+    console.log(msg)
+
+    //切换语言
+    const [lang, setLang] = useLocalStorageState<any | undefined>(
+        'lang',
+        {
+            defaultValue: navigator.language.toLowerCase().indexOf('zh') >= 0 ? 'zh' : 'en',
+        },
+    );
+    console.log(lang)
     //默认模板
     const [templateList, setTemplateList] = useLocalStorageState<any | undefined>(
         'templateList',
@@ -187,13 +204,13 @@ export default function HomePage() {
     }
 
     //复制
-    const copyMarkdown=()=>{
+    const copyMarkdown = () => {
         copy(previewData)
         message.success("复制成功")
     }
 
     //下载
-    const downLoadMarkdown=()=>{
+    const downLoadMarkdown = () => {
         const dataStr = `data:application/md;charset=utf-8,` + encodeURIComponent(previewData);
         const download = document.createElement('a');
         download.setAttribute('href', dataStr);
@@ -206,6 +223,20 @@ export default function HomePage() {
 
     return (
         <Layout className={'max-h-screen h-screen'}>
+            <header className={'h-[5vh] flex justify-end items-center px-9 bg-gray-800'}>
+                <Select
+                    defaultValue="en"
+                    style={{width: 120}}
+                    onChange={() => {
+                    }}
+                    options={[
+                        {value: 'jack', label: 'Jack'},
+                        {value: 'lucy', label: 'Lucy'},
+                        {value: 'Yiminghe', label: 'yiminghe'},
+                        {value: 'disabled', label: 'Disabled', disabled: true},
+                    ]}
+                />
+            </header>
             <Content className={'h-[95vh] max-[95vh] px-3'}>
                 <div className={'grid grid-cols-5 gap-2 h-full'}>
                     <Card
@@ -219,8 +250,8 @@ export default function HomePage() {
                             />
                         }
                         bodyStyle={{
-                            height:'95%',
-                            overflow:'auto',
+                            height: '95%',
+                            overflow: 'auto',
                         }}
                     >
                         <div className={'mb-1 text-base'}>已使用模板</div>
@@ -316,8 +347,8 @@ export default function HomePage() {
                         title={'编辑'}
                         className={'col-span-2 h-full'}
                         bodyStyle={{
-                            padding:12,
-                            height:'95%',
+                            padding: 12,
+                            height: '95%',
                         }}
                     >
                         <MdEditor
@@ -369,8 +400,8 @@ export default function HomePage() {
                             />
                         </div>}
                         bodyStyle={{
-                            height:'95%',
-                            overflow:'auto',
+                            height: '95%',
+                            overflow: 'auto',
                         }}
                     >
                         <MdEditor
