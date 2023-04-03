@@ -57,7 +57,7 @@ export default function HomePage() {
     }
 
     //获取当前md
-    const getCurrentMarkdown = () => currentId ? templateList.find((item: any) => item.id == currentId).markdown : ""
+    const getCurrentMarkdown = () => currentId ? templateList.find((item: any) => item.id == currentId).markdown : "请先选择一个模板来编辑内容"
 
     //编辑器
     const [editorData, setEditorData] = useState<any>("")
