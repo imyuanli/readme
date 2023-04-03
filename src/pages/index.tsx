@@ -16,28 +16,13 @@ import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
 import _ from "lodash";
 import {nanoid} from "nanoid";
 import copy from 'copy-to-clipboard'
-import en from '../locales/en-US'
-import zh from '../locales/zh-CN'
-import { useIntl } from 'umi';
+import {useIntl, setLocale} from "umi";
 
 const {confirm} = Modal;
 const {Content} = Layout;
 export default function HomePage() {
     const intl = useIntl();
-    const msg = intl.formatMessage({
-        id: 'welcome',
-    });
-
-    console.log(msg)
-
-    //切换语言
-    const [lang, setLang] = useLocalStorageState<any | undefined>(
-        'lang',
-        {
-            defaultValue: navigator.language.toLowerCase().indexOf('zh') >= 0 ? 'zh' : 'en',
-        },
-    );
-    console.log(lang)
+    const getIntlNameValue = (id:any) => intl.formatMessage({id: `${id}.name`})
     //默认模板
     const [templateList, setTemplateList] = useLocalStorageState<any | undefined>(
         'templateList',
@@ -187,8 +172,6 @@ export default function HomePage() {
             title: '恢复初始状态',
             icon: <ExclamationCircleFilled/>,
             content: '是否重置您所有自述文件的模板',
-            okText: '确认',
-            cancelText: '取消',
             onOk() {
                 restoreInitialState()
             },
@@ -224,18 +207,9 @@ export default function HomePage() {
     return (
         <Layout className={'max-h-screen h-screen'}>
             <header className={'h-[5vh] flex justify-end items-center px-9 bg-gray-800'}>
-                <Select
-                    defaultValue="en"
-                    style={{width: 120}}
-                    onChange={() => {
-                    }}
-                    options={[
-                        {value: 'jack', label: 'Jack'},
-                        {value: 'lucy', label: 'Lucy'},
-                        {value: 'Yiminghe', label: 'yiminghe'},
-                        {value: 'disabled', label: 'Disabled', disabled: true},
-                    ]}
-                />
+                <Button onClick={()=>{
+                    setLocale('en-US', false)
+                }}>切换</Button>
             </header>
             <Content className={'h-[95vh] max-[95vh] px-3'}>
                 <div className={'grid grid-cols-5 gap-2 h-full'}>
@@ -297,7 +271,7 @@ export default function HomePage() {
                                                                                 }
                                                                             }}
                                                                         >
-                                                                            {item?.name}
+                                                                            {getIntlNameValue(item.id)}
                                                                         </Dropdown.Button>
                                                                     </div>
                                                                 )
@@ -425,8 +399,6 @@ export default function HomePage() {
                         inputValue: "",
                     })
                 }}
-                okText={'确认'}
-                cancelText={'取消'}
             >
                 <Input
                     placeholder="模板名称"

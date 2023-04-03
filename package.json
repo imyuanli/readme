@@ -21,9 +21,7 @@
     "md-editor-rt": "^2.11.0",
     "nanoid": "^4.0.2",
     "react-beautiful-dnd": "^13.1.1",
-    "react-intl-universal": "^2.6.6",
     "umi": "^4.0.63",
-    "umi-plugin-locale": "^2.11.7",
     "umi-plugin-react": "^1.15.9"
   },
   "devDependencies": {
