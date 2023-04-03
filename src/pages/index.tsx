@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {DEFAULT_README_TEMPLATE} from "@/constants/default";
-import {Button, Card, Dropdown, Input, Layout, Modal} from "antd";
+import {Button, Card, Dropdown, Input, Layout, message, Modal} from "antd";
 import {
     CopyOutlined,
     DownloadOutlined,
@@ -15,6 +15,8 @@ import 'md-editor-rt/lib/style.css';
 import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
 import _ from "lodash";
 import {nanoid} from "nanoid";
+import copy from 'copy-to-clipboard'
+
 
 const {confirm} = Modal;
 const {Content} = Layout;
@@ -184,14 +186,27 @@ export default function HomePage() {
         })
     }
 
+    //复制
+    const copyMarkdown=()=>{
+        copy(previewData)
+        message.success("复制成功")
+    }
+
+    //下载
+    const downLoadMarkdown=()=>{
+        const dataStr = `data:application/md;charset=utf-8,` + encodeURIComponent(previewData);
+        const download = document.createElement('a');
+        download.setAttribute('href', dataStr);
+        download.setAttribute('download', 'README.md');
+        document.body.appendChild(download);
+        download.click();
+        download.remove();
+        message.success("下载成功")
+    }
+
     return (
         <Layout className={'max-h-screen h-screen'}>
-            <header className={'h-[5vh] flex justify-between items-center px-9 bg-gray-800'}>
-                <div>
-                    <img src="https://readme.so/readme.svg" alt="" className={'h-12'}/>
-                </div>
-            </header>
-            <Content className={'h-[95vh] max-[95vh]'}>
+            <Content className={'h-[95vh] max-[95vh] px-3'}>
                 <div className={'grid grid-cols-5 gap-2 h-full'}>
                     <Card
                         title={'模板'}
@@ -345,10 +360,12 @@ export default function HomePage() {
                                 icon={<CopyOutlined/>}
                                 type={'primary'}
                                 className={'mr-3'}
+                                onClick={copyMarkdown}
                             />
                             <Button
                                 icon={<DownloadOutlined/>}
                                 type={'primary'}
+                                onClick={downLoadMarkdown}
                             />
                         </div>}
                         bodyStyle={{
