@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {DEFAULT_README_TEMPLATE} from "@/constants/default";
+import {DEFAULT_TEMPLATE_ID} from "@/constants/default";
 import {Button, Card, Dropdown, Input, Layout, message, Modal, Select} from "antd";
 import {
     CopyOutlined,
@@ -16,18 +16,32 @@ import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
 import _ from "lodash";
 import {nanoid} from "nanoid";
 import copy from 'copy-to-clipboard'
-import {useIntl, setLocale} from "umi";
+import {useIntl, setLocale, getLocale} from "umi";
 
 const {confirm} = Modal;
 const {Content} = Layout;
 export default function HomePage() {
+    //中英文切换
     const intl = useIntl();
-    const getIntlNameValue = (id:any) => intl.formatMessage({id: `${id}.name`})
+    const getIntlValue = (id: any) => intl.formatMessage({id})
+
+    //初始化默认模板
+    const initDefaultTemplate = () => {
+        console.log("intl", intl)
+        return DEFAULT_TEMPLATE_ID.map((id: string) => {
+            return {
+                id,
+                name: getIntlValue(`${id}.name`),
+                markdown: getIntlValue(`${id}.markdown`),
+            }
+        })
+    }
+
     //默认模板
     const [templateList, setTemplateList] = useLocalStorageState<any | undefined>(
         'templateList',
         {
-            defaultValue: DEFAULT_README_TEMPLATE,
+            defaultValue: initDefaultTemplate(),
         },
     );
 
@@ -58,9 +72,8 @@ export default function HomePage() {
         previewData: '',
         isModalOpen: false,
         inputValue: '',
-        isRestModal: false
     })
-    const {previewData, isModalOpen, inputValue, isRestModal} = state
+    const {previewData, isModalOpen, inputValue} = state
 
     //选择模板
     const handleSelectTemplate = (id: string) => {
@@ -148,7 +161,7 @@ export default function HomePage() {
 
     //重置
     const reSetSection = (id: string) => {
-        const defaultRes = DEFAULT_README_TEMPLATE.find((item: any) => item.id == id)
+        const defaultRes = initDefaultTemplate().find((item: any) => item.id == id)
         const res = [...templateList]
         const list = res.find((item: any) => item.id == id)
         list.markdown = defaultRes ? defaultRes.markdown : `## ${list.name}`
@@ -169,27 +182,24 @@ export default function HomePage() {
     //恢复默认状态
     const handleRestModal = () => {
         confirm({
-            title: '恢复初始状态',
+            title: getIntlValue('reset-title'),
             icon: <ExclamationCircleFilled/>,
-            content: '是否重置您所有自述文件的模板',
+            content: getIntlValue('reset-text'),
             onOk() {
                 restoreInitialState()
             },
-        });
+        })
     }
     const restoreInitialState = () => {
-        setTemplateList(DEFAULT_README_TEMPLATE)
+        setTemplateList([...initDefaultTemplate()])
         setSelectIdArr(['title-and-description'])
         setCurrentId('title-and-description')
-        setState({
-            isRestModal: false
-        })
     }
 
     //复制
     const copyMarkdown = () => {
         copy(previewData)
-        message.success("复制成功")
+        message.success(getIntlValue('copy-success'))
     }
 
     //下载
@@ -201,20 +211,32 @@ export default function HomePage() {
         document.body.appendChild(download);
         download.click();
         download.remove();
-        message.success("下载成功")
+        message.success(getIntlValue('download-success'))
     }
 
+    //切换语言
+    const handleChangeLang = (value: any) => {
+        setLocale(value, false)
+        restoreInitialState()
+    }
+    console.log(getLocale())
     return (
         <Layout className={'max-h-screen h-screen'}>
-            <header className={'h-[5vh] flex justify-end items-center px-9 bg-gray-800'}>
-                <Button onClick={()=>{
-                    setLocale('en-US', false)
-                }}>切换</Button>
+            <header className={'flex justify-end items-center px-9 py-3 bg-gray-700'}>
+                <Select
+                    defaultValue={getLocale()}
+                    style={{width: 120}}
+                    onChange={handleChangeLang}
+                    options={[
+                        {value: 'zh-CN', label: '中文'},
+                        {value: 'en-US', label: 'English'},
+                    ]}
+                />
             </header>
             <Content className={'h-[95vh] max-[95vh] px-3'}>
                 <div className={'grid grid-cols-5 gap-2 h-full'}>
                     <Card
-                        title={'模板'}
+                        title={getIntlValue('template')}
                         className={'col-span-1 h-full overflow-hidden'}
                         extra={
                             <Button
@@ -228,7 +250,7 @@ export default function HomePage() {
                             overflow: 'auto',
                         }}
                     >
-                        <div className={'mb-1 text-base'}>已使用模板</div>
+                        <div className={'mb-1 text-base'}>{getIntlValue('use')}</div>
                         <div className={'mb-3 w-full'}>
                             <DragDropContext onDragEnd={onDragEnd}>
                                 <Droppable droppableId={_.uniqueId("droppableId")}>
@@ -271,7 +293,7 @@ export default function HomePage() {
                                                                                 }
                                                                             }}
                                                                         >
-                                                                            {getIntlNameValue(item.id)}
+                                                                            {item.name}
                                                                         </Dropdown.Button>
                                                                     </div>
                                                                 )
@@ -295,10 +317,10 @@ export default function HomePage() {
                                     })
                                 }}
                             >
-                                <span className={'font-bold'}>自定义模板</span>
+                                <span className={'font-bold'}>{getIntlValue('btn-text')}</span>
                             </Button>
                         </div>
-                        <div className={'mb-1 text-base'}>未使用模板</div>
+                        <div className={'mb-1 text-base'}>{getIntlValue('no-use')}</div>
                         {templateList.map((item: any) => {
                             if (!isHaveInTemplate(item.id)) {
                                 return (
@@ -318,7 +340,7 @@ export default function HomePage() {
                         })}
                     </Card>
                     <Card
-                        title={'编辑'}
+                        title={getIntlValue('edit')}
                         className={'col-span-2 h-full'}
                         bodyStyle={{
                             padding: 12,
@@ -358,7 +380,7 @@ export default function HomePage() {
                         />
                     </Card>
                     <Card
-                        title={'预览'}
+                        title={getIntlValue('preview')}
                         className={'col-span-2 h-full overflow-hidden'}
                         extra={<div>
                             <Button
@@ -390,7 +412,7 @@ export default function HomePage() {
                 </div>
             </Content>
             <Modal
-                title="添加自定义模板"
+                title={getIntlValue('modal-title')}
                 open={isModalOpen}
                 onOk={addNewTemplate}
                 onCancel={() => {
@@ -401,7 +423,7 @@ export default function HomePage() {
                 }}
             >
                 <Input
-                    placeholder="模板名称"
+                    placeholder={getIntlValue('modal-placeholder')}
                     value={inputValue}
                     onChange={(e: any) => {
                         setState({
