@@ -25,16 +25,13 @@ export default function HomePage() {
     const getIntlValue = (id: any) => intl.formatMessage({id})
 
     //初始化默认模板
-    const initDefaultTemplate = () => {
-        console.log("intl", intl)
-        return DEFAULT_TEMPLATE_ID.map((id: string) => {
-            return {
-                id,
-                name: getIntlValue(`${id}.name`),
-                markdown: getIntlValue(`${id}.markdown`),
-            }
-        })
-    }
+    const initDefaultTemplate = () => DEFAULT_TEMPLATE_ID.map((id: string) => {
+        return {
+            id,
+            name: getIntlValue(`${id}.name`),
+            markdown: getIntlValue(`${id}.markdown`),
+        }
+    })
 
     //默认模板
     const [templateList, setTemplateList] = useLocalStorageState<any | undefined>(
@@ -71,8 +68,9 @@ export default function HomePage() {
         previewData: '',
         isModalOpen: false,
         inputValue: '',
+        lang: getLocale()
     })
-    const {previewData, isModalOpen, inputValue} = state
+    const {previewData, isModalOpen, inputValue, lang} = state
 
     //选择模板
     const handleSelectTemplate = (id: string) => {
@@ -88,7 +86,7 @@ export default function HomePage() {
     const [editorData, setEditorData] = useState<any>("")
     useEffect(() => {
         setEditorData(getCurrentMarkdown())
-    }, [currentId])
+    }, [currentId, templateList])
 
     //更改模板的值
     useEffect(() => {
@@ -216,9 +214,14 @@ export default function HomePage() {
     //切换语言
     const handleChangeLang = (value: any) => {
         setLocale(value, false)
-        restoreInitialState()
+        setState({lang: getLocale()})
     }
-    console.log(getLocale())
+
+    useEffect(() => {
+        restoreInitialState()
+    }, [lang])
+
+
     return (
         <Layout className={'max-h-screen h-screen'}>
             <header className={'flex justify-end items-center px-9 py-3 bg-gray-700'}>

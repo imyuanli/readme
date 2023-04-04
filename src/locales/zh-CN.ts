@@ -1,7 +1,7 @@
 export default {
     'template':'模板',
     'edit':'编辑',
-    'preview':'编辑',
+    'preview':'预览',
     'use':'已使用模板',
     'no-use':'未使用模板',
     'btn-text':'自定义模板',
@@ -12,7 +12,7 @@ export default {
     'reset-title':'恢复初始状态',
     'reset-text':'是否重置您所有自述文件的模板？',
     'lang-change-title':'语言切换',
-    'lang-change-text':'切换语言会重置您所有自述文件的模板？',
+    'lang-change-text':'切换语言会重置您所有自述文件的模板',
     'title-and-description.name': '标题和描述',
     'title-and-description.markdown':`
 # 项目标题

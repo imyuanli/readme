@@ -12,7 +12,7 @@ export default {
     'reset-title':'Restore initial state',
     'reset-text':'Do you want to reset the templates for all your readme files？',
     'lang-change-title':'Language switching',
-    'lang-change-text':'Switching languages will reset the templates for all your readme files？',
+    'lang-change-text':'Switching languages will reset the templates for all your readme files',
     'title-and-description.name': 'Title and Description',
     'title-and-description.markdown':`
 # Project Title
