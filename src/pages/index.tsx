@@ -13,7 +13,6 @@ import {useLocalStorageState, useSetState} from "ahooks";
 import MdEditor from 'md-editor-rt';
 import 'md-editor-rt/lib/style.css';
 import {DragDropContext, Droppable, Draggable} from "react-beautiful-dnd";
-import _ from "lodash";
 import {nanoid} from "nanoid";
 import copy from 'copy-to-clipboard'
 import {useIntl, setLocale, getLocale} from "umi";
@@ -253,7 +252,7 @@ export default function HomePage() {
                         <div className={'mb-1 text-base'}>{getIntlValue('use')}</div>
                         <div className={'mb-3 w-full'}>
                             <DragDropContext onDragEnd={onDragEnd}>
-                                <Droppable droppableId={_.uniqueId("droppableId")}>
+                                <Droppable droppableId={nanoid()}>
                                     {(provided: any) => {
                                         return (
                                             <div

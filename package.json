@@ -17,7 +17,6 @@
     "ahooks": "^3.7.6",
     "antd": "^5.3.2",
     "copy-to-clipboard": "^3.3.3",
-    "lodash": "^4.17.21",
     "md-editor-rt": "^2.11.0",
     "nanoid": "^4.0.2",
     "react-beautiful-dnd": "^13.1.1",
