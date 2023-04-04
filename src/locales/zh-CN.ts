@@ -49,27 +49,27 @@ Javascript, HTML, CSS...
     'github-other.markdown':`
 ## 其他常见的 Github 简介部分
 
-👩‍💻 我当前就职于... **[名称](https://example.com)**
+👩‍💻 我当前就职于 **[名称](https://example.com)**
         
-🧠 我目前在学习... **[名称](https://example.com)**
+🧠 我目前在学习 **[名称](https://example.com)**
             
-📄 了解我的经历... **[名称](https://example.com)**
+📄 了解我的经历 **[名称](https://example.com)**
     
-👨‍💻 我所有项目都在... **[名称](https://example.com)**
+👨‍💻 我所有项目都在 **[名称](https://example.com)**
     
-📝 我定期写的文章在... **[名称](https://example.com)**
+📝 我定期写的文章在 **[名称](https://example.com)**
 
-👯‍ 我希望能在以下方面进行合作... **[名称](https://example.com)**
+👯‍ 我希望能在以下方面进行合作 **[名称](https://example.com)**
 
-🤔 我想寻求帮助的是... **[名称](https://example.com)**
+🤔 我想寻求帮助的是 **[名称](https://example.com)**
 
-💬 向我咨询... **[名称](https://example.com)**
+💬 向我咨询 **[名称](https://example.com)**
 
-📫 如何联系我... **[名称](https://example.com)**
+📫 如何联系我 **[名称](https://example.com)**
 
-😄 代名词... **[名称](https://example.com)**
+😄 代名词 **[名称](https://example.com)**
 
-⚡ 性格方面... **[名称](https://example.com)**
+⚡ 性格方面 **[名称](https://example.com)**
 
 `,
     'github-stats.name': 'Github - 统计卡片',

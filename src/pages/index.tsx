@@ -25,13 +25,15 @@ export default function HomePage() {
     const getIntlValue = (id: any) => intl.formatMessage({id})
 
     //初始化默认模板
-    const initDefaultTemplate = () => DEFAULT_TEMPLATE_ID.map((id: string) => {
-        return {
-            id,
-            name: getIntlValue(`${id}.name`),
-            markdown: getIntlValue(`${id}.markdown`),
-        }
-    })
+    const initDefaultTemplate = () => {
+        return DEFAULT_TEMPLATE_ID.map((id: string) => {
+            return {
+                id,
+                name: getIntlValue(`${id}.name`),
+                markdown: getIntlValue(`${id}.markdown`),
+            }
+        })
+    }
 
     //默认模板
     const [templateList, setTemplateList] = useLocalStorageState<any | undefined>(
@@ -79,14 +81,13 @@ export default function HomePage() {
         setCurrentId(id)
     }
 
-    //获取当前md
-    const getCurrentMarkdown = () => currentId ? templateList.find((item: any) => item.id == currentId).markdown : "请先选择一个模板来编辑内容"
-
     //编辑器
     const [editorData, setEditorData] = useState<any>("")
     useEffect(() => {
+        //获取当前md
+        const getCurrentMarkdown = () => currentId ? templateList.find((item: any) => item.id == currentId).markdown : "请先选择一个模板来编辑内容"
         setEditorData(getCurrentMarkdown())
-    }, [currentId, templateList])
+    }, [currentId])
 
     //更改模板的值
     useEffect(() => {
@@ -163,7 +164,6 @@ export default function HomePage() {
         const list = res.find((item: any) => item.id == id)
         list.markdown = defaultRes ? defaultRes.markdown : `## ${list.name}`
         setTemplateList([...res])
-        setEditorData(getCurrentMarkdown())
     }
 
     //删除
@@ -188,9 +188,12 @@ export default function HomePage() {
         })
     }
     const restoreInitialState = () => {
-        setTemplateList([...initDefaultTemplate()])
+        const res: any = initDefaultTemplate()
+        setTemplateList([...res])
         setSelectIdArr(['title-and-description'])
         setCurrentId('title-and-description')
+        const currentMarkdown = () => res.find((item: any) => item.id == currentId)?.markdown
+        setEditorData(currentMarkdown)
     }
 
     //复制
@@ -217,6 +220,7 @@ export default function HomePage() {
         setState({lang: getLocale()})
     }
 
+    //切换完语言更新页面的值
     useEffect(() => {
         restoreInitialState()
     }, [lang])

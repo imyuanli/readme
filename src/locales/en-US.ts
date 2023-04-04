@@ -51,29 +51,29 @@ Javascript, HTML, CSS...
     'github-other.markdown':`
 ## Other Common Github Profile Sections
 
-👩‍💻 I'm currently working on... **[name](https://example.com)**
+👩‍💻 I'm currently working on **[name](https://example.com)**
     
-🤝 I’m looking for help with... **[name](https://example.com)**
+🤝 I’m looking for help with **[name](https://example.com)**
     
-🧠 I'm currently learning... **[name](https://example.com)**
+🧠 I'm currently learning **[name](https://example.com)**
             
-📄 Know about my experiences... **[name](https://example.com)**
+📄 Know about my experiences **[name](https://example.com)**
     
-👨‍💻 All of my projects are available at... **[name](https://example.com)**
+👨‍💻 All of my projects are available at **[name](https://example.com)**
     
-📝 I regularly write articles on... **[name](https://example.com)**
+📝 I regularly write articles on **[name](https://example.com)**
 
-👯  I’m looking to collaborate on... **[name](https://example.com)**
+👯  I’m looking to collaborate on **[name](https://example.com)**
 
-🤔 I'm looking for help with... **[name](https://example.com)**
+🤔 I'm looking for help with **[name](https://example.com)**
 
-💬 Ask me about... **[name](https://example.com)**
+💬 Ask me about **[name](https://example.com)**
 
-📫 How to reach me... **[name](https://example.com)**
+📫 How to reach me **[name](https://example.com)**
 
-😄 Pronouns... **[name](https://example.com)**
+😄 Pronouns **[name](https://example.com)**
 
-⚡ Fun fact... **[name](https://example.com)**
+⚡ Fun fact **[name](https://example.com)**
 
 `,
     'github-stats.name': 'Github - Stats Card',
