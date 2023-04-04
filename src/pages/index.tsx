@@ -107,8 +107,8 @@ export default function HomePage() {
 
     //拖拽
     const onDragEnd = (result: any) => {
-        const sourceIndex = result.source.index;
-        const destinationIndex = result.destination.index;
+        const sourceIndex = result?.source?.index;
+        const destinationIndex = result?.destination?.index;
         if (sourceIndex === destinationIndex) {
             return;
         }
