@@ -1,9 +1,13 @@
 export default {
   npmClient: "npm",
   tailwindcss: {},
-  // history:{
-  //   type:'hash'
-  // },
-  // publicPath: './', // 资源访问路径，默认/
-  plugins: ["@umijs/plugins/dist/tailwindcss"],
+  plugins: ["@umijs/plugins/dist/tailwindcss","@umijs/plugins/dist/locale"],
+  locale: {
+    enable: true,
+    default: 'en-US',
+    baseSeparator: '-',
+    baseNavigator: false,
+    title: false,
+    useLocalStorage: true,
+  },
 };

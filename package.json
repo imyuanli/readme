@@ -3,8 +3,6 @@
   "author": "yuanli <2865437316@qq.com>",
   "homepage": "https://imyuanli.github.io/",
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
     "dev": "umi dev",
     "build": "umi build",
     "postinstall": "umi setup",
@@ -12,19 +10,24 @@
     "start": "npm run dev"
   },
   "dependencies": {
-    "@emotion/react": "^11.10.4",
-    "@emotion/styled": "^11.10.4",
-    "@mui/material": "^5.10.7",
-    "gh-pages": "^4.0.0",
-    "react-intl-universal": "^2.6.6",
-    "umi": "^4.0.22",
-    "umi-plugin-locale": "^2.11.7",
+    "@ant-design/icons": "^5.0.1",
+    "@types/lodash": "^4.14.192",
+    "@types/react-beautiful-dnd": "^13.1.4",
+    "@vavt/md-editor-extension": "^2.0.0",
+    "ahooks": "^3.7.6",
+    "antd": "^5.3.2",
+    "copy-to-clipboard": "^3.3.3",
+    "md-editor-rt": "^2.11.0",
+    "nanoid": "^4.0.2",
+    "react-beautiful-dnd": "^13.1.1",
+    "umi": "^4.0.63",
     "umi-plugin-react": "^1.15.9"
   },
   "devDependencies": {
+    "@types/marked": "^4.0.8",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
-    "@umijs/plugins": "^4.0.22",
+    "@umijs/plugins": "^4.0.63",
     "tailwindcss": "^3",
     "typescript": "^4.1.2"
   }

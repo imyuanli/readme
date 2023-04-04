@@ -1,10 +1,9 @@
 module.exports = {
   content: [
-    './src/pages/**/*.tsx',
-    './src/components/**.tsx',
-    './src/layouts/**.tsx',
-    './src/components/**.tsx',
-    './src/components/base/**.tsx',
+    './src/layouts/*.tsx',
+    './src/pages/*.tsx',
+    './src/components/*.tsx',
+    './src/components/**/*.tsx',
   ],
   theme:{
     extend:{
@@ -12,5 +11,8 @@ module.exports = {
         '5/11': '47.7%',
       }
     }
+  },
+  corePlugins: {
+    preflight: false
   }
 }
