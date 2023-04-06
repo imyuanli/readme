@@ -9,7 +9,7 @@
     "postinstall": "umi setup",
     "setup": "umi setup",
     "start": "npm run dev",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s && git commit -m \"docs: 更改CHANGELOG.md"
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },
   "dependencies": {
     "@ant-design/icons": "^5.0.1",
