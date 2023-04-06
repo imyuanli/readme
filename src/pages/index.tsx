@@ -83,10 +83,17 @@ export default function HomePage() {
 
     //编辑器
     const [editorData, setEditorData] = useState<any>("")
+
+    //获取当前md
+    const getCurrentMarkdown = () => {
+        let res: any = "请先选择一个模板来编辑内容"
+        if (currentId) {
+            res = templateList.find((item: any) => item.id == currentId).markdown
+        }
+        setEditorData(res)
+    }
     useEffect(() => {
-        //获取当前md
-        const getCurrentMarkdown = () => currentId ? templateList.find((item: any) => item.id == currentId).markdown : "请先选择一个模板来编辑内容"
-        setEditorData(getCurrentMarkdown())
+        getCurrentMarkdown()
     }, [currentId])
 
     //更改模板的值
@@ -164,6 +171,7 @@ export default function HomePage() {
         const list = res.find((item: any) => item.id == id)
         list.markdown = defaultRes ? defaultRes.markdown : `## ${list.name}`
         setTemplateList([...res])
+        getCurrentMarkdown()
     }
 
     //删除

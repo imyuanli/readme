@@ -22,13 +22,13 @@ export default {
 `,
     'github-intro.name': 'Github - 介绍',
     'github-intro.markdown':`
-# 你好, 我是 Katherine! 👋
+# 你好, 我是鸢离! 👋
 
 `,
     'github-about-me.name': 'Github - 关于我',
     'github-about-me.markdown':`
 ## 🚀 关于
-我是一个全栈开发...
+我是一个前端开发工程师...
 
 `,
     'github-skills.name': 'Github - 技能',
