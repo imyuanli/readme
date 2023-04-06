@@ -22,13 +22,13 @@ A brief description of what this project does and who it's for
 `,
     'github-intro.name': 'Github - Introduction',
     'github-intro.markdown':`
-# Hi, I'm Katherine! 👋
+# Hi, I'm YuanLi! 👋
 
 `,
     'github-about-me.name': 'Github - About Me',
     'github-about-me.markdown':`
 ## 🚀 About Me
-I'm a full stack developer...
+I'm a front-end development engineer...
 
 `,
     'github-skills.name': 'Github - Skills',

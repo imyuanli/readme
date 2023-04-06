@@ -2,12 +2,14 @@
   "private": true,
   "author": "yuanli <2865437316@qq.com>",
   "homepage": "https://imyuanli.github.io/",
+  "version": "2.0.4",
   "scripts": {
     "dev": "umi dev",
     "build": "umi build",
     "postinstall": "umi setup",
     "setup": "umi setup",
-    "start": "npm run dev"
+    "start": "npm run dev",
+    "release": "standard-version"
   },
   "dependencies": {
     "@ant-design/icons": "^5.0.1",
@@ -20,6 +22,7 @@
     "md-editor-rt": "^2.11.0",
     "nanoid": "^4.0.2",
     "react-beautiful-dnd": "^13.1.1",
+    "standard-version": "^9.5.0",
     "umi": "^4.0.63",
     "umi-plugin-react": "^1.15.9"
   },
