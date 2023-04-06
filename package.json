@@ -9,7 +9,7 @@
     "postinstall": "umi setup",
     "setup": "umi setup",
     "start": "npm run dev",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
+    "release": "standard-version"
   },
   "dependencies": {
     "@ant-design/icons": "^5.0.1",
@@ -18,11 +18,11 @@
     "@vavt/md-editor-extension": "^2.0.0",
     "ahooks": "^3.7.6",
     "antd": "^5.3.2",
-    "conventional-changelog-cli": "^2.2.2",
     "copy-to-clipboard": "^3.3.3",
     "md-editor-rt": "^2.11.0",
     "nanoid": "^4.0.2",
     "react-beautiful-dnd": "^13.1.1",
+    "standard-version": "^9.5.0",
     "umi": "^4.0.63",
     "umi-plugin-react": "^1.15.9"
   },
