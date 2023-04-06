@@ -2,7 +2,7 @@
   "private": true,
   "author": "yuanli <2865437316@qq.com>",
   "homepage": "https://imyuanli.github.io/",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "scripts": {
     "dev": "umi dev",
     "build": "umi build",
