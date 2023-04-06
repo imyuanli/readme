@@ -2,14 +2,14 @@
   "private": true,
   "author": "yuanli <2865437316@qq.com>",
   "homepage": "https://imyuanli.github.io/",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "scripts": {
     "dev": "umi dev",
     "build": "umi build",
     "postinstall": "umi setup",
     "setup": "umi setup",
     "start": "npm run dev",
-    "version": "conventional-changelog -p angular -i CHANGELOG.md -s"
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s && git commit -m \"docs: 更改CHANGELOG.md"
   },
   "dependencies": {
     "@ant-design/icons": "^5.0.1",
