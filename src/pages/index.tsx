@@ -222,7 +222,10 @@ export default function HomePage() {
 
     //切换完语言更新页面的值
     useEffect(() => {
-        restoreInitialState()
+        const res: any = initDefaultTemplate()
+        setTemplateList([...res])
+        const currentMarkdown = () => res.find((item: any) => item.id == currentId)?.markdown
+        setEditorData(currentMarkdown)
     }, [lang])
 
 
