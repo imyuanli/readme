@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://gitee.com/imyuanli/readme/compare/v2.0.4...v2.1.0) (2023-04-11)
+
+
+### ✨ Features | 新功能
+
+* 新增模板 ([9da1934](https://gitee.com/imyuanli/readme/commit/9da1934165252eceab6e8c08499ddfb9ab8f847b))
+
+
+### 📦‍ Build System | 打包构建
+
+* 包版本锁定 ([57d662f](https://gitee.com/imyuanli/readme/commit/57d662fdbd7039e7e628235a30a670f88708ab53))
+
 ### [2.0.4](https://gitee.com/imyuanli/readme/compare/v2.0.3...v2.0.4) (2023-04-06)
 
 
