@@ -12,26 +12,26 @@
     "release": "standard-version"
   },
   "dependencies": {
-    "@ant-design/icons": "^5.0.1",
-    "@types/lodash": "^4.14.192",
+    "@ant-design/icons": "^5.1.4",
+    "@types/lodash": "^4.14.195",
     "@types/react-beautiful-dnd": "^13.1.4",
-    "@vavt/md-editor-extension": "^2.0.0",
-    "ahooks": "^3.7.6",
-    "antd": "^5.3.2",
+    "@vavt/md-editor-extension": "^3.0.0",
+    "ahooks": "^3.7.8",
+    "antd": "^5.6.4",
     "copy-to-clipboard": "^3.3.3",
-    "md-editor-rt": "^2.11.0",
+    "md-editor-rt": "^4.2.1",
     "nanoid": "^4.0.2",
     "react-beautiful-dnd": "^13.1.1",
     "standard-version": "^9.5.0",
-    "umi": "^4.0.63",
+    "umi": "^4.0.72",
     "umi-plugin-react": "^1.15.9"
   },
   "devDependencies": {
-    "@types/marked": "^4.0.8",
-    "@types/react": "^18.0.0",
-    "@types/react-dom": "^18.0.0",
-    "@umijs/plugins": "^4.0.63",
-    "tailwindcss": "^3",
-    "typescript": "^4.1.2"
+    "@types/marked": "^5.0.0",
+    "@types/react": "^18.2.14",
+    "@types/react-dom": "^18.2.6",
+    "@umijs/plugins": "^4.0.72",
+    "tailwindcss": "^3.3.2",
+    "typescript": "^5.1.6"
   }
 }
