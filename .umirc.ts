@@ -3,10 +3,9 @@ export default {
   tailwindcss: {},
   plugins: ["@umijs/plugins/dist/tailwindcss","@umijs/plugins/dist/locale"],
   locale: {
-    enable: true,
     default: 'en-US',
     baseSeparator: '-',
-    baseNavigator: false,
+    baseNavigator: true,
     title: false,
     useLocalStorage: true,
   },

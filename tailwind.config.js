@@ -6,11 +6,6 @@ module.exports = {
     './src/components/**/*.tsx',
   ],
   theme:{
-    extend:{
-      width: {
-        '5/11': '47.7%',
-      }
-    }
   },
   corePlugins: {
     preflight: false
